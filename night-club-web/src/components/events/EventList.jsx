@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Link from "next/link";
 
 const BASE_URL = "https://night-club-th9v.onrender.com";
 
@@ -26,23 +27,25 @@ async function EventList({ page = 1 }) {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {events.map((event) => (
-          <div key={event.id}>
-            <img src={`${BASE_URL}${event.asset.url}`} alt={event.asset.alt} className="mb-3 w-full h-48 object-cover" />
+          <Link key={event.id} href={`/events/${event.slug}`}>
+            <div className="cursor-pointer">
+              <img src={`${BASE_URL}${event.asset.url}`} alt={event.asset.alt} className="mb-3 w-full h-48 object-cover" />
 
-            <div className="p-10">
-              <h2 className="text-xl font-bold">{event.title}</h2>
+              <div className="p-10">
+                <h2 className="text-xl font-bold">{event.title}</h2>
 
-              <div className="flex items-center gap-4 mt-1">
-                <p className="text-lg text-pink-500">{new Date(event.date).toLocaleDateString("da-DK")}</p>
+                <div className="flex items-center gap-4 mt-1">
+                  <p className="text-lg text-pink-500">{new Date(event.date).toLocaleDateString("da-DK")}</p>
 
-                <p className="text-lg font-bold">{event.location}</p>
+                  <p className="text-lg font-bold">{event.location}</p>
+                </div>
+
+                <p className="text-sm opacity-70">{event.excerpt}</p>
+
+                <Button slug={event.slug} />
               </div>
-
-              <p className="text-sm opacity-70">{event.excerpt}</p>
-
-              <Button />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
