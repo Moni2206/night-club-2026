@@ -12,7 +12,7 @@ export default async function EventPage({ params }) {
 
   const event = events.find((e) => e.slug === slug);
 
-  if (!event) return <p>Event ikke fundet</p>;
+  if (!event) return <p>Event Not found </p>;
 
   return (
     <div>
