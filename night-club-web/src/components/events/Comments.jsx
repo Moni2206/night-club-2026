@@ -60,7 +60,7 @@ const Comments = async ({ eventId }) => {
         <textarea name="content" placeholder="Your Comment" className="pb-58 bg-black border border-white"></textarea>
 
         <div className="flex justify-end">
-          <button className="text-white px-4 py-2 border-y-2 border-white w-fit">Send kommentar</button>
+          <button className="text-white px-10 py-2 border-y-2 border-white w-fit">SUBMIT</button>
         </div>
       </form>
     </div>

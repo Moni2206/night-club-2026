@@ -21,7 +21,7 @@ export default async function EventsPage({ searchParams }) {
 
       {/* EVENTS */}
       <div className="md:px-24 py-10">
-        <Suspense fallback={<p className="text-white">Henter fede events...</p>}>
+        <Suspense fallback={<p className="text-white">Fetching data...</p>}>
           <EventList page={page} />
         </Suspense>
       </div>
