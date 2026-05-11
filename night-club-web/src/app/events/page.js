@@ -16,7 +16,7 @@ export default async function EventsPage({ searchParams }) {
       >
         <div className="absolute inset-0 bg-black/85"></div>
 
-        <h1 className="relative text-[32px] md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">Events</h1>
+        <h1 className="relative text-[32px] md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">EVENTS</h1>
       </div>
 
       {/* EVENTS */}
