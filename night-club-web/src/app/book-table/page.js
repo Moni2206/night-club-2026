@@ -1,19 +1,40 @@
 "use client";
-import { useSearchParams } from "next/navigation";
 
+import { z } from "zod";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const BASE_URL = "https://night-club-th9v.onrender.com";
+
+// ZOD SCHEMA
+const reservationSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters").max(50, "Name is too long"),
+
+  email: z.string().email("Invalid email address"),
+
+  guests: z.coerce.number().min(1, "Minimum 1 guest").max(12, "Maximum 12 guests"),
+
+  phone: z
+    .string()
+    .min(8, "Phone number is too short")
+    .regex(/^[0-9+\s]+$/, "Invalid phone number"),
+
+  eventId: z.string().min(1, "Please select an event"),
+
+  table: z.string().min(1, "Please select a table"),
+
+  content: z.string().optional(),
+});
 
 export default function Home() {
   const [selectedTable, setSelectedTable] = useState("");
   const [reservations, setReservations] = useState([]);
   const [events, setEvents] = useState([]);
-  const searchParams = useSearchParams();
-
   const [selectedEvent, setSelectedEvent] = useState("");
 
-  // LOAD RESERVATIONS
+  const searchParams = useSearchParams();
+
+  // LOAD EVENT FROM URL
   useEffect(() => {
     const eventFromUrl = searchParams.get("event");
 
@@ -21,10 +42,11 @@ export default function Home() {
       setSelectedEvent(eventFromUrl);
     }
   }, [searchParams]);
+
+  // LOAD RESERVATIONS
   useEffect(() => {
     async function loadReservations() {
       const res = await fetch(`${BASE_URL}/reservations`);
-
       const data = await res.json();
 
       setReservations(data);
@@ -37,7 +59,6 @@ export default function Home() {
   useEffect(() => {
     async function loadEvents() {
       const res = await fetch(`${BASE_URL}/events`);
-
       const data = await res.json();
 
       setEvents(data);
@@ -46,7 +67,7 @@ export default function Home() {
     loadEvents();
   }, []);
 
-  // CHECK IF TABLE IS RESERVED
+  // CHECK RESERVED TABLE
   function isTableReserved(tableNumber) {
     return reservations.some((reservation) => reservation.table === tableNumber);
   }
@@ -55,30 +76,42 @@ export default function Home() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    const formData = new FormData(e.target);
+
+    const rawData = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      guests: formData.get("guests"),
+      phone: formData.get("phone"),
+      content: formData.get("content"),
+      eventId: selectedEvent,
+      table: selectedTable,
+    };
+
+    // VALIDATE WITH ZOD
+    const result = reservationSchema.safeParse(rawData);
+
+    if (!result.success) {
+      const firstError = result.error.issues[0]?.message || "Validation error";
+
+      alert(firstError);
+      return;
+    }
+
+    // CHECK TABLE
     if (isTableReserved(selectedTable)) {
       alert("Dette bord er allerede reserveret");
       return;
     }
 
-    const formData = new FormData(e.target);
-
-    const reservation = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      table: selectedTable,
-      guests: formData.get("guests"),
-      date: formData.get("date"),
-      phone: formData.get("phone"),
-      eventId: selectedEvent,
-    };
+    // VALID DATA
+    const reservation = result.data;
 
     const res = await fetch(`${BASE_URL}/reservations`, {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json",
       },
-
       body: JSON.stringify(reservation),
     });
 
@@ -89,6 +122,7 @@ export default function Home() {
 
     alert("Reservation gennemført!");
 
+    // UPDATE RESERVATIONS
     const updatedReservations = await fetch(`${BASE_URL}/reservations`);
 
     const updatedData = await updatedReservations.json();
@@ -97,6 +131,7 @@ export default function Home() {
 
     e.target.reset();
     setSelectedTable("");
+    setSelectedEvent("");
   }
 
   return (
@@ -124,13 +159,13 @@ export default function Home() {
               <div className="relative">
                 <img src="/assets/table/table_1.png" alt="Table 1" className="cursor-pointer" />
 
-                {isTableReserved("3") && (
+                {isTableReserved("1") && (
                   <div className="absolute inset-0  flex items-center justify-center">
                     <span className="text-white font-bold text-lg">BOOKED</span>
                   </div>
                 )}
               </div>
-              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("3") ? "text-transparent" : "text-white"}`}>3</p>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("1") ? "text-transparent" : "text-white"}`}>1</p>
             </button>
           </div>
 
@@ -140,13 +175,13 @@ export default function Home() {
               <div className="relative">
                 <img src="/assets/table/table_1.png" alt="Table 2" className="cursor-pointer" />
 
-                {isTableReserved("3") && (
+                {isTableReserved("2") && (
                   <div className="absolute inset-0  flex items-center justify-center">
                     <span className="text-white font-bold text-lg">BOOKED</span>
                   </div>
                 )}
               </div>
-              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("2") ? "text-transparent" : "text-white"}`}>2</p>{" "}
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("2") ? "text-transparent" : "text-white"}`}>2</p>
             </button>
           </div>
 
@@ -163,11 +198,6 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                {isTableReserved("3") && (
-                  <div className="absolute inset-0  flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">BOOKED</span>
-                  </div>
-                )}
               </div>
               <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("3") ? "text-transparent" : "text-white"}`}>3</p>{" "}
             </button>
@@ -370,13 +400,13 @@ export default function Home() {
         <div className="gap-6 p-10">
           <form onSubmit={handleSubmit} className="grid gap-4">
             <div className="grid grid-cols-2 gap-4">
-              <input name="name" placeholder="Your Name" className="p-3 bg-black border w-full" />
+              <input name="name" placeholder="Your Name" required minLength={2} maxLength={50} className="p-3 bg-black border w-full" />
 
-              <input name="email" type="email" placeholder="Your Email" className="p-3 bg-black border w-full" />
+              <input name="email" type="email" required placeholder="Your Email" className="p-3 bg-black border w-full" />
 
               <input value={selectedTable} readOnly placeholder="Table Number" className="p-3 bg-black border w-full" />
 
-              <input name="guests" placeholder="Number of Guests" className="p-3 bg-black border w-full" />
+              <input name="guests" placeholder="Number of Guests" type="number" min="1" max="12" className="p-3 bg-black border w-full" />
 
               <select name="event" value={selectedEvent} onChange={(e) => setSelectedEvent(e.target.value)} className="p-3 bg-black border w-full text-white">
                 <option value="">Choose Night</option>
@@ -388,7 +418,7 @@ export default function Home() {
                 ))}
               </select>
 
-              <input name="phone" placeholder="Your Contact Number" className="p-3 bg-black border w-full" />
+              <input name="phone" placeholder="Your Contact Number" pattern="[0-9\s+]+" required className="p-3 bg-black border w-full" />
             </div>
 
             <textarea name="content" placeholder="Your Comment" className="pb-58 bg-black border border-white"></textarea>
