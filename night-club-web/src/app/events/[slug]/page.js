@@ -2,9 +2,9 @@ import Comments from "@/components/events/Comments";
 import Link from "next/link";
 
 const BASE_URL = "https://night-club-th9v.onrender.com";
-
 export default async function EventPage({ params }) {
-  const { slug } = await params;
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
 
   const res = await fetch(`${BASE_URL}/events`, {
     cache: "no-store",
