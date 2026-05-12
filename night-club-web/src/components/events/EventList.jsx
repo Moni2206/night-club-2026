@@ -29,7 +29,7 @@ async function EventList({ page = 1 }) {
         {events.map((event) => (
           <Link key={event.id} href={`/events/${event.slug}`}>
             <div className="cursor-pointer">
-              <img src={`${BASE_URL}${event.asset.url}`} alt={event.asset.alt} className="mb-3 w-full h-48 object-cover" />
+              <img src={`${BASE_URL}${event.asset.url}`} alt={event.asset.alt} className="mb-3 w-full h-full object-cover" />
 
               <div className="p-10">
                 <h2 className="text-xl font-bold">{event.title}</h2>

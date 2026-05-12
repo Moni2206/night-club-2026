@@ -1,4 +1,5 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 
 import { useEffect, useState } from "react";
 
@@ -8,8 +9,18 @@ export default function Home() {
   const [selectedTable, setSelectedTable] = useState("");
   const [reservations, setReservations] = useState([]);
   const [events, setEvents] = useState([]);
+  const searchParams = useSearchParams();
+
+  const [selectedEvent, setSelectedEvent] = useState("");
 
   // LOAD RESERVATIONS
+  useEffect(() => {
+    const eventFromUrl = searchParams.get("event");
+
+    if (eventFromUrl) {
+      setSelectedEvent(eventFromUrl);
+    }
+  }, [searchParams]);
   useEffect(() => {
     async function loadReservations() {
       const res = await fetch(`${BASE_URL}/reservations`);
@@ -58,7 +69,7 @@ export default function Home() {
       guests: formData.get("guests"),
       date: formData.get("date"),
       phone: formData.get("phone"),
-      eventId: formData.get("event"),
+      eventId: selectedEvent,
     };
 
     const res = await fetch(`${BASE_URL}/reservations`, {
@@ -89,11 +100,11 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen min-w-screen text-white flex justify-center">
-      <div className="w-full max-w-7xl px-6 md:px-16">
+    <div className=" min-w-screen text-white flex justify-center">
+      <div className="w-full max-w-7xl px-6 ">
         {/* HERO */}
         <div
-          className="relative h-50 flex items-center justify-center"
+          className="relative h-50 w-full flex items-center justify-center"
           style={{
             backgroundImage: "url('/assets/bg/footerbg.jpg')",
             backgroundSize: "cover",
@@ -102,7 +113,7 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-black/85"></div>
 
-          <h1 className="relative text-[32px] md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">Book Table</h1>
+          <h1 className="relative text-[32px] md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">BOOK TABLE</h1>
         </div>
 
         {/* TABLES */}
@@ -110,135 +121,247 @@ export default function Home() {
           {/* TABLE 1 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("1")} onClick={() => setSelectedTable("1")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 1" className={`cursor-pointer ${isTableReserved("1") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 1" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">1</p>
+                {isTableReserved("3") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("3") ? "text-transparent" : "text-white"}`}>3</p>
             </button>
           </div>
 
           {/* TABLE 2 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("2")} onClick={() => setSelectedTable("2")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 2" className={`cursor-pointer ${isTableReserved("2") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 2" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">2</p>
+                {isTableReserved("3") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("2") ? "text-transparent" : "text-white"}`}>2</p>{" "}
             </button>
           </div>
 
           {/* TABLE 3 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("3")} onClick={() => setSelectedTable("3")} className="relative">
-              <img src="/assets/table/table_2.png" alt="Table 3" className={`cursor-pointer ${isTableReserved("3") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <div className="relative">
+                  <img src="/assets/table/table_2.png" alt="Table 3" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">3</p>
+                  {isTableReserved("3") && (
+                    <div className="absolute inset-0  flex items-center justify-center">
+                      <span className="text-white font-bold text-lg">BOOKED</span>
+                    </div>
+                  )}
+                </div>
+                {isTableReserved("3") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("3") ? "text-transparent" : "text-white"}`}>3</p>{" "}
             </button>
           </div>
 
           {/* TABLE 4 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("4")} onClick={() => setSelectedTable("4")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 4" className={`cursor-pointer ${isTableReserved("4") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 4" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">4</p>
+                {isTableReserved("4") && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("4") ? "text-transparent" : "text-white"}`}>4</p>{" "}
             </button>
           </div>
 
           {/* TABLE 5 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("5")} onClick={() => setSelectedTable("5")} className="relative">
-              <img src="/assets/table/table_3.png" alt="Table 5" className={`cursor-pointer ${isTableReserved("5") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_3.png" alt="Table 5" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">5</p>
+                {isTableReserved("5") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("5") ? "text-transparent" : "text-white"}`}>5</p>{" "}
             </button>
           </div>
 
           {/* TABLE 6 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("6")} onClick={() => setSelectedTable("6")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 6" className={`cursor-pointer ${isTableReserved("6") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 6" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">6</p>
+                {isTableReserved("6") && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("6") ? "text-transparent" : "text-white"}`}>6</p>{" "}
             </button>
           </div>
 
           {/* TABLE 7 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("7")} onClick={() => setSelectedTable("7")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 7" className={`cursor-pointer ${isTableReserved("7") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 7" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">7</p>
+                {isTableReserved("7") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("7") ? "text-transparent" : "text-white"}`}>7</p>
             </button>
           </div>
 
           {/* TABLE 8 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("8")} onClick={() => setSelectedTable("8")} className="relative">
-              <img src="/assets/table/table_2.png" alt="Table 8" className={`cursor-pointer ${isTableReserved("8") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_2.png" alt="Table 8" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">8</p>
+                {isTableReserved("8") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("8") ? "text-transparent" : "text-white"}`}>8</p>
             </button>
           </div>
 
           {/* TABLE 9 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("9")} onClick={() => setSelectedTable("9")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 9" className={`cursor-pointer ${isTableReserved("9") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 9" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">9</p>
+                {isTableReserved("9") && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("9") ? "text-transparent" : "text-white"}`}>9</p>
             </button>
           </div>
 
           {/* TABLE 10 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("10")} onClick={() => setSelectedTable("10")} className="relative">
-              <img src="/assets/table/table_3.png" alt="Table 10" className={`cursor-pointer ${isTableReserved("10") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_3.png" alt="Table 10" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">10</p>
+                {isTableReserved("10") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("10") ? "text-transparent" : "text-white"}`}>10</p>
             </button>
           </div>
 
           {/* TABLE 11 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("11")} onClick={() => setSelectedTable("11")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 11" className={`cursor-pointer ${isTableReserved("11") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 11" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">11</p>
+                {isTableReserved("11") && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("11") ? "text-transparent" : "text-white"}`}>11</p>{" "}
             </button>
           </div>
 
           {/* TABLE 12 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("12")} onClick={() => setSelectedTable("12")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 12" className={`cursor-pointer ${isTableReserved("12") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 12" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">12</p>
+                {isTableReserved("12") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("12") ? "text-transparent" : "text-white"}`}>12</p>{" "}
             </button>
           </div>
 
           {/* TABLE 13 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("13")} onClick={() => setSelectedTable("13")} className="relative">
-              <img src="/assets/table/table_2.png" alt="Table 13" className={`cursor-pointer ${isTableReserved("13") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_2.png" alt="Table 13" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">13</p>
+                {isTableReserved("13") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("13") ? "text-transparent" : "text-white"}`}>13</p>{" "}
             </button>
           </div>
 
           {/* TABLE 14 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("14")} onClick={() => setSelectedTable("14")} className="relative">
-              <img src="/assets/table/table_1.png" alt="Table 14" className={`cursor-pointer ${isTableReserved("14") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_1.png" alt="Table 14" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">14</p>
+                {isTableReserved("14") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("14") ? "text-transparent" : "text-white"}`}>14</p>
             </button>
           </div>
 
           {/* TABLE 15 */}
           <div className="relative h-50 flex items-center justify-center">
             <button disabled={isTableReserved("15")} onClick={() => setSelectedTable("15")} className="relative">
-              <img src="/assets/table/table_3.png" alt="Table 15" className={`cursor-pointer ${isTableReserved("15") ? "opacity-30" : ""}`} />
+              <div className="relative">
+                <img src="/assets/table/table_3.png" alt="Table 15" className="cursor-pointer" />
 
-              <p className="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">15</p>
+                {isTableReserved("15") && (
+                  <div className="absolute inset-0  flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">BOOKED</span>
+                  </div>
+                )}
+              </div>
+              <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${isTableReserved("15") ? "text-transparent" : "text-white"}`}>15</p>{" "}
             </button>
           </div>
         </div>
@@ -255,7 +378,7 @@ export default function Home() {
 
               <input name="guests" placeholder="Number of Guests" className="p-3 bg-black border w-full" />
 
-              <select name="event" className="p-3 bg-black border w-full text-white">
+              <select name="event" value={selectedEvent} onChange={(e) => setSelectedEvent(e.target.value)} className="p-3 bg-black border w-full text-white">
                 <option value="">Choose Night</option>
 
                 {events.map((event) => (
