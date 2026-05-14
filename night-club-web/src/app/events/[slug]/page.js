@@ -1,4 +1,5 @@
 import Comments from "@/components/events/Comments";
+import BookNow from "@/components/events/BookNow";
 import Link from "next/link";
 
 const BASE_URL = "https://night-club-th9v.onrender.com";
@@ -54,7 +55,7 @@ export default async function EventPage({ params }) {
             </div>
 
             {/* SCHEDULE */}
-            <div className="mt-10">
+            <div className="mt-10 mb-5">
               <h2 className="text-2xl font-bold text-pink-500 mb-6">Schedule</h2>
 
               <div className="space-y-4">
@@ -69,11 +70,12 @@ export default async function EventPage({ params }) {
             </div>
 
             {/* BUTTON */}
-            <div className="mt-8">
+            <BookNow />
+            {/* <div className="mt-8">
               <Link href={`/book-table?event=${event.id}`} className="border-y-2 border-white px-12 py-3 text-base uppercase w-full block text-center">
                 Book Now
               </Link>
-            </div>
+            </div> */}
           </div>
 
           {/* RIGHT SIDE */}
