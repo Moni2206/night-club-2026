@@ -1,5 +1,5 @@
 import BookingClient from "@/components/book-table/BookingClient";
-
+import Navbar from "../../components/Navbar";
 const BASE_URL = "https://night-club-th9v.onrender.com";
 
 async function getReservations() {
@@ -19,5 +19,10 @@ async function getEvents() {
 export default async function Page() {
   const [reservations, events] = await Promise.all([getReservations(), getEvents()]);
 
-  return <BookingClient initialReservations={reservations} initialEvents={events} />;
+  return (
+    <div>
+      <Navbar />
+      <BookingClient initialReservations={reservations} initialEvents={events} />
+    </div>
+  );
 }

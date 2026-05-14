@@ -1,4 +1,5 @@
 "use client";
+import Navbar from "../../components/Navbar";
 
 import { useState } from "react";
 
@@ -66,6 +67,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <Navbar />
       {/* HERO */}
       <div
         className="relative h-64 md:h-80 flex items-center justify-center text-white"
