@@ -1,10 +1,13 @@
 import { Suspense } from "react";
 import EventList from "@/components/events/EventList";
+import Navbar from "../../components/Navbar";
 
 export default async function EventsPage({ searchParams }) {
   const page = Number((await searchParams)?.page || 1);
   return (
     <div className="min-h-screen">
+      <Navbar />
+
       {/* HERO */}
       <div
         className="relative h-50 flex items-center justify-center text-white"

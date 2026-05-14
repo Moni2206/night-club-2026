@@ -2,8 +2,9 @@
 
 /* FARVER */
 :root {
-  --background: #000;
-  --foreground: #fff;
+  --background: oklch(0% 0 0);
+  --foreground: oklch(100% 0 0);
+  --pink: oklch(65.35% 0.242 9.27);
 }
 
 /* BODY */
@@ -13,7 +14,6 @@ body {
 }
 
 /* ========== NAVBAR EFFECT ========== */
-
 .nav-link {
   position: relative;
   display: inline-block;
@@ -23,19 +23,17 @@ body {
   transform-style: preserve-3d;
 }
 
-/* HOVER FARVE */
 .nav-link:hover {
-  color: #ff4fd8;
+  color: var(--pink);
   transform: rotateX(15deg);
 }
 
-/* 3D "BACK SIDE" EFFEKT */
 .nav-link::after {
   content: attr(data-text);
   position: absolute;
   left: 0;
   top: 0;
-  color: #ff4fd8;
+  color: var(--pink);
   transform: rotateX(90deg) translateZ(10px);
   transform-origin: center;
   opacity: 0;
@@ -44,4 +42,31 @@ body {
 
 .nav-link:hover::after {
   opacity: 1;
+}
+
+@keyframes logo-fold-in {
+  0% {
+    opacity: 0;
+    transform: perspective(400px) rotateX(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0deg);
+  }
+}
+
+@keyframes tagline-elevator {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.animate-tagline {
+  opacity: 0;
+  animation: tagline-elevator 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
 }

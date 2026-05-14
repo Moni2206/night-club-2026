@@ -1,6 +1,7 @@
 import Comments from "@/components/events/Comments";
 import BookNow from "@/components/events/BookNow";
 import Link from "next/link";
+import Navbar from "../../../components/Navbar";
 
 const BASE_URL = "https://night-club-th9v.onrender.com";
 export default async function EventPage({ params }) {
@@ -19,6 +20,7 @@ export default async function EventPage({ params }) {
 
   return (
     <div>
+      <Navbar />
       <div className="text-white p-10">
         {/* HERO IMAGE */}
         <img src={`${BASE_URL}${event.heroAsset.url}`} alt={event.heroAsset.alt} className="w-full h-[500px] object-cover rounded-[30px] border-4 border-pink-500 mb-10" />

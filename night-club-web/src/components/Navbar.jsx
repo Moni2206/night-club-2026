@@ -15,7 +15,11 @@ const GlobalNav = () => {
   const [hoveredPath, setHoveredPath] = useState(null);
 
   return (
-    <header className="w-full full-width nav-style">
+    <header className=" sticky top-0 z-50 relative w-full full-width nav-style bg-black border-y-2 border-[oklch(65.35%_0.242_9.27)] sticky top-0 z-50">
+      <div className="absolute top-0 left-0 w-6 h-6 bg-[oklch(65.35%_0.242_9.27)] [clip-path:polygon(0%_0%,100%_0%,0%_100%)]"></div>
+
+      <div className="absolute bottom-0 right-0 w-6 h-6 bg-[oklch(65.35%_0.242_9.27)] [clip-path:polygon(100%_0%,100%_100%,0%_100%)]"></div>
+
       <div className="flex items-center justify-between py-4 mx-6 lg:mx-20">
         {/* LOGO */}
         <Link href="/">
