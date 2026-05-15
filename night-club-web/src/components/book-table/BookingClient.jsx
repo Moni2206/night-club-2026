@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useEffect } from "react";
 import { z } from "zod";
 import { createReservation } from "@/actions/reservation";
-
+import { useSearchParams } from "next/navigation";
 const reservationSchema = z.object({
   name: z.string().min(2).max(50),
   email: z.string().email(),
@@ -36,10 +37,18 @@ const TABLES = [
 ];
 
 export default function BookingClient({ initialReservations, initialEvents }) {
+  const searchParams = useSearchParams();
+  console.log("Reservationer:", initialReservations);
+  // Læs eventId fra URL — fx ?event=1
+  const eventIdFromUrl = searchParams.get("event") ?? "";
+
   const [reservations, setReservations] = useState(initialReservations);
   const [events, setEvents] = useState(initialEvents);
   const [selectedTable, setSelectedTable] = useState("");
-  const [selectedEvent, setSelectedEvent] = useState("");
+  const [selectedEvent, setSelectedEvent] = useState(eventIdFromUrl);
+  useEffect(() => {
+    setSelectedEvent(eventIdFromUrl);
+  }, [eventIdFromUrl]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -138,14 +147,14 @@ export default function BookingClient({ initialReservations, initialEvents }) {
                     {/* Rødt overlay — optaget på valgt dato */}
                     {reserved && (
                       <div className="absolute inset-0 bg-red-900/70 flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">OPTAGET</span>
+                        <span className="text-white font-bold text-lg">Booked</span>
                       </div>
                     )}
 
                     {/* Gult overlay — optaget på en anden dato */}
                     {!reserved && reservedAnyDate && (
                       <div className="absolute inset-0 bg-red-900/50 flex items-center justify-center">
-                        <span className="text-white font-bold text-lg mt-10">Booked</span>
+                        <span className="text-white font-bold text-lg mt-10">Partly occupied</span>
                       </div>
                     )}
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navbar from "../../../components/Navbar";
 
 const BASE_URL = "https://night-club-th9v.onrender.com";
+
 export default async function EventPage({ params }) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
@@ -16,7 +17,15 @@ export default async function EventPage({ params }) {
 
   const event = events.find((e) => e.slug === slug);
 
-  if (!event) return <p>Event Not found</p>;
+  if (!event) {
+    return (
+      <div className="text-white text-center py-40">
+        <h2 className="text-3xl font-bold mb-4">Event not found</h2>
+
+        <p className="text-base text-gray-300">Please try another event.</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -72,12 +81,7 @@ export default async function EventPage({ params }) {
             </div>
 
             {/* BUTTON */}
-            <BookNow />
-            {/* <div className="mt-8">
-              <Link href={`/book-table?event=${event.id}`} className="border-y-2 border-white px-12 py-3 text-base uppercase w-full block text-center">
-                Book Now
-              </Link>
-            </div> */}
+            <BookNow eventId={event.id} />
           </div>
 
           {/* RIGHT SIDE */}

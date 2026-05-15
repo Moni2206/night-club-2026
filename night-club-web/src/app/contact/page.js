@@ -1,9 +1,16 @@
 "use client";
 import Navbar from "../../components/Navbar";
-
 import { useState } from "react";
+import { z } from "zod";
 
 const BASE_URL = "https://night-club-th9v.onrender.com";
+
+/* ✅ KRAV: Zod validation */
+const contactSchema = z.object({
+  name: z.string().min(2).max(50),
+  email: z.string().email(),
+  message: z.string().min(5),
+});
 
 export default function Home() {
   const [form, setForm] = useState({
@@ -31,8 +38,11 @@ export default function Home() {
     setSuccess("");
     setError("");
 
-    if (!form.name || !form.email || !form.message) {
-      setError("Please fill in all fields.");
+    /* ✅ KRAV: client-side validation (Zod) */
+    const result = contactSchema.safeParse(form);
+
+    if (!result.success) {
+      setError("Please enter a valid name, email and message.");
       return;
     }
 
@@ -47,18 +57,27 @@ export default function Home() {
         body: JSON.stringify(form),
       });
 
-      if (!res.ok) {
-        throw new Error();
+      /* ✅ KRAV: brugervenlige API-fejl */
+      if (res.status === 409) {
+        setError("This email has already been used.");
+        setLoading(false);
+        return;
       }
 
-      setSuccess("Message sent successfully!");
+      if (!res.ok) {
+        setError("Something went wrong. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      setSuccess("Your message has been sent successfully!");
 
       setForm({
         name: "",
         email: "",
         message: "",
       });
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -68,6 +87,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Navbar />
+
       {/* HERO */}
       <div
         className="relative h-64 md:h-80 flex items-center justify-center text-white"
@@ -83,18 +103,19 @@ export default function Home() {
       </div>
 
       {/* FORM */}
-      <div className="px-4 md:px-20 xl:px-40 py-10">
+      <div className="px-6 md:px-45 py-10 max-w-3xl md:max-w-4xl mx-auto">
         <form onSubmit={handleSubmit} className="mt-10 grid grid-cols-1 gap-4 max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" name="name" placeholder="Your Name" value={form.name} onChange={handleChange} className="p-3 bg-black border border-white w-full text-white" />
+          <div className="grid grid-cols-1 gap-4">
+            <input type="text" name="name" placeholder="Your Name" value={form.name} onChange={handleChange} disabled={loading} /* ✅ KRAV: loading state */ className="p-3 bg-black border border-white w-full text-white" />
 
-            <input type="email" name="email" placeholder="Your Email" value={form.email} onChange={handleChange} className="p-3 bg-black border border-white w-full text-white" />
+            <input type="email" name="email" placeholder="Your Email" value={form.email} onChange={handleChange} disabled={loading} /* ✅ KRAV */ className="p-3 bg-black border border-white w-full text-white" />
           </div>
 
-          <textarea name="message" placeholder="Your Comment" value={form.message} onChange={handleChange} className="p-3 h-40 bg-black border border-white w-full text-white resize-none" />
+          <textarea name="message" placeholder="Your Comment" value={form.message} onChange={handleChange} disabled={loading} /* ✅ KRAV */ className="p-3 h-60 bg-black border border-white w-full text-white resize-none" />
 
-          {error && <p>{error}</p>}
-          {success && <p>{success}</p>}
+          {/* FEEDBACK */}
+          {error && <p className="text-red-500">{error}</p>}
+          {success && <p className="text-green-500">{success}</p>}
 
           <div className="flex justify-end">
             <button type="submit" disabled={loading} className="px-10 py-2 border-y-2 border-white w-fit">

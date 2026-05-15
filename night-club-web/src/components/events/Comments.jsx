@@ -10,12 +10,15 @@ const Comments = async ({ eventId }) => {
     const email = formData.get("email");
     const content = formData.get("content");
 
+    if (!name || !email || !content) {
+      return;
+    }
+
     await fetch(`${BASE_URL}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-
       body: JSON.stringify({
         eventId,
         name,

@@ -14,10 +14,10 @@ const textVariants = {
   hover: { color: pink, transition: { duration: 0.3 } },
 };
 
-export default function Button({ slug }) {
+export default function Button({ eventId }) {
   return (
     <div className="flex justify-center mb-8">
-      <Link href={`/book-table`} className="w-full block">
+      <Link href={`/book-table?event=${eventId}`} className="w-full block">
         <motion.div initial="rest" whileHover="hover" animate="rest" className="relative w-full py-5 uppercase overflow-hidden text-center cursor-pointer">
           {/* TEXT */}
           <motion.span variants={textVariants} className="relative z-20">
