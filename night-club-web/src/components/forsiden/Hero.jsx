@@ -5,7 +5,7 @@ import BtnBook from "@/components/forsiden/HeroBtnBook";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const MotionImage = motion(Image);
+const MotionImage = motion.create(Image);
 
 const heroImages = ["/assets/bg/header_bg_1.jpg", "/assets/bg/header_bg_2.jpg"];
 
