@@ -1,14 +1,17 @@
 import Image from "next/image";
 import Hero from "@/components/forsiden/Hero";
 import Navbar from "../components/Navbar";
+import Sektion1 from "@/components/forsiden/Sektion1";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <main className="max-w-screen-2xl mx-auto">
       <Hero />
-      <div className="absolute bottom-0 left-0 w-full">
+      <div className="left-0 w-full">
         <Navbar />
       </div>
-    </div>
+      <h2 className="relative mt-8 text-[32px] text-center md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">WELCOME IN NIGHTCLUB</h2>
+      <Sektion1 />
+    </main>
   );
 }
