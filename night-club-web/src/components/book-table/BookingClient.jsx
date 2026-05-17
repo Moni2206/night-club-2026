@@ -128,7 +128,7 @@ export default function BookingClient({ initialReservations, initialEvents }) {
               backgroundPosition: "center",
             }}
           >
-            <div className="absolute inset-0 bg-black/85"></div>
+            <div className="absolute inset-0 bg-[var(--background)]/85"></div>
             <h1 className="relative text-[32px] md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">BOOK BORD</h1>
           </div>
 
@@ -169,11 +169,11 @@ export default function BookingClient({ initialReservations, initialEvents }) {
           <div className="gap-6 p-10">
             <form onSubmit={handleSubmit} className="grid gap-4">
               <div className="grid grid-cols-2 gap-4">
-                <input name="name" placeholder="Your Name" required minLength={2} maxLength={50} className="p-3 bg-black border w-full" />
-                <input name="email" type="email" required placeholder="Your Email" className="p-3 bg-black border w-full" />
-                <input name="table" value={selectedTable ?? ""} readOnly placeholder="Table Number" className="p-3 bg-black border w-full" />
-                <input name="guests" placeholder="Number of Guests" type="text" min="1" max="12" className="p-3 bg-black border w-full" />
-                <select name="event" value={selectedEvent ?? ""} onChange={(e) => setSelectedEvent(e.target.value)} className="p-3 bg-black border w-full text-white">
+                <input name="name" placeholder="Your Name" required minLength={2} maxLength={50} className="p-3 bg-[var(--background)] border w-full" />
+                <input name="email" type="email" required placeholder="Your Email" className="p-3 bg-[var(--background)] border w-full" />
+                <input name="table" value={selectedTable ?? ""} readOnly placeholder="Table Number" className="p-3 bg-[var(--background)] border w-full" />
+                <input name="guests" placeholder="Number of Guests" type="text" min="1" max="12" className="p-3 bg-[var(--background)] border w-full" />
+                <select name="event" value={selectedEvent ?? ""} onChange={(e) => setSelectedEvent(e.target.value)} className="p-3 bg-[var(--background)] border w-full text-white">
                   <option value="">Choose Night</option>
                   {events.map((event) => (
                     <option key={event.id} value={event.id}>
@@ -181,10 +181,10 @@ export default function BookingClient({ initialReservations, initialEvents }) {
                     </option>
                   ))}
                 </select>
-                <input name="phone" placeholder="Your Contact Number" pattern="[0-9\s+]+" required className="p-3 bg-black border w-full" />
+                <input name="phone" placeholder="Your Contact Number" pattern="[0-9\s+]+" required className="p-3 bg-[var(--background)] border w-full" />
               </div>
 
-              <textarea name="content" placeholder="Your Comment" className="h-[15rem] p-3 bg-black border border-white w-full resize-none" />
+              <textarea name="content" placeholder="Your Comment" className="h-[15rem] p-3 bg-[var(--background)] border border-white w-full resize-none" />
 
               {error && <p className="text-red-500">{error}</p>}
               {success && <p className="text-green-500">{success}</p>}

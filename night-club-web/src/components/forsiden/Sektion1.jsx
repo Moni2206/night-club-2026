@@ -24,42 +24,27 @@ const cards = [
 
 const Sektion1 = () => {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 px-16 md:px-24 xl:px-40">
-      {" "}
+    <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
       {cards.map((card) => {
         const Icon = card.icon;
-
         return (
-          <div key={card.title} className="relative overflow-hidden group h-[450px] ">
-            {/* IMAGE */}
+          <div key={card.title} className="relative overflow-hidden group h-[500px]">
             <img src={card.img} alt={card.title} className="w-full h-full object-cover" />
 
-            {/* SORT OVERLAY */}
-            <div className="absolute inset-0 bg-black/100 opacity-0 group-hover:opacity-100 transition-all duration-[1500ms]"></div>
+            <div className="absolute inset-0 bg-[var(--background)] opacity-0 group-hover:opacity-90 transition-all duration-[1500ms]" />
 
-            {/* TOP BORDER */}
-            <div className="absolute top-0 left-[-100%] w-full h-[2px] bg-[oklch(65.35%_0.242_9.27)] group-hover:left-0 transition-all duration-[1500ms]"></div>
+            <div className="absolute top-0 left-[-100%] w-full h-[2px] bg-[var(--pink)] group-hover:left-0 transition-all duration-[1500ms]" />
+            <div className="absolute bottom-0 right-[-100%] w-full h-[2px] bg-[var(--pink)] group-hover:right-0 transition-all duration-[1500ms]" />
 
-            {/* BOTTOM BORDER */}
-            <div className="absolute bottom-0 right-[-100%] w-full h-[2px] bg-[oklch(65.35%_0.242_9.27)] group-hover:right-0 transition-all duration-[1500ms]"></div>
+            <div className="absolute top-0 left-0 w-20 h-20 bg-[var(--pink)] [clip-path:polygon(0_0,100%_0,0_100%)] opacity-0 group-hover:opacity-100 transition-all duration-[1500ms]" />
+            <div className="absolute bottom-0 right-0 w-20 h-20 bg-[var(--pink)] [clip-path:polygon(100%_0,100%_100%,0_100%)] opacity-0 group-hover:opacity-100 transition-all duration-[1500ms]" />
 
-            {/* TOP LEFT CORNER */}
-            <div className="absolute top-0 left-0 w-20 h-20 bg-[oklch(65.35%_0.242_9.27)] [clip-path:polygon(0_0,100%_0,0_100%)] opacity-0 group-hover:opacity-100 transition-all duration-[1500ms]"></div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 opacity-0 group-hover:opacity-100 transition-all duration-[1500ms]">
+              <div className="border-2 border-[var(--pink)] p-6 mb-6">{typeof card.icon === "string" ? <img src={card.icon} alt={card.title} className="w-[50px] h-[50px] object-contain" /> : <Icon size={50} className="text-[var(--pink)]" />}</div>
 
-            {/* BOTTOM RIGHT CORNER */}
-            <div className="absolute bottom-0 right-0 w-20 h-20 bg-[oklch(65.35%_0.242_9.27)] [clip-path:polygon(100%_0,100%_100%,0_100%)] opacity-0 group-hover:opacity-100 transition-all duration-[1500ms]"></div>
+              <h3 className="text-[ var(--headlines)] text-2xl font-bold mb-6">{card.title}</h3>
 
-            {/* CONTENT */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-1 opacity-0 group-hover:opacity-100 transition-all duration-[1500ms]">
-              {/* ICON */}
-              <div className="border-2 border-[oklch(65.35%_0.242_9.27)] p-6 mb-6">
-                {typeof card.icon === "string" ? <img src={card.icon} alt={card.title} className="w-[50px] h-[50px] object-contain" /> : <Icon size={50} className="text-[oklch(65.35%_0.242_9.27)]" />}
-              </div>
-
-              <h3 className="text-white text-2xl font-bold mb-6">{card.title}</h3>
-
-              {/* TEKST — kommer fra siden med delay */}
-              <p className="text-white text-base leading-8 opacity-0 translate-x-20 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-[1500ms] delay-300">{card.text}</p>
+              <p className="text-[var(--text)] text-base leading-8 opacity-0 translate-x-20 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-[1500ms] delay-300">{card.text}</p>
             </div>
           </div>
         );

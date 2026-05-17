@@ -2,9 +2,11 @@
 
 /* FARVER */
 :root {
-  --background: oklch(0% 0 0);
+  --background: oklch(13.98% 0 0);
   --foreground: oklch(100% 0 0);
   --pink: oklch(65.35% 0.242 9.27);
+  --headlines: oklch(100% 0 0);
+  --text: oklch(82.03% 0 0);
 }
 
 /* BODY */

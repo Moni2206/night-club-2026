@@ -22,7 +22,7 @@ export default async function EventPage({ params }) {
       <div className="text-white text-center py-40">
         <h2 className="text-3xl font-bold mb-4">Event not found</h2>
 
-        <p className="text-base text-gray-300">Please try another event.</p>
+        <p className="text-base text-[var(--text)]">Please try another event.</p>
       </div>
     );
   }
@@ -32,7 +32,7 @@ export default async function EventPage({ params }) {
       <Navbar />
       <div className="text-white p-10">
         {/* HERO IMAGE */}
-        <img src={`${BASE_URL}${event.heroAsset.url}`} alt={event.heroAsset.alt} className="w-full h-[500px] object-cover rounded-[30px] border-4 border-pink-500 mb-10" />
+        <img src={`${BASE_URL}${event.heroAsset.url}`} alt={event.heroAsset.alt} className="w-full h-[500px] object-cover rounded-[30px] border-4 border-text-[var(--pink)]-500 mb-10" />
 
         {/* CONTENT */}
         <div className="grid grid-cols-1 md:grid-cols-[40%_60%] mt-10 gap-10">
@@ -43,13 +43,13 @@ export default async function EventPage({ params }) {
             </h3>
 
             <p className="text-base mb-10">
-              <span className="text-pink-500 font-bold">Sted</span> {event.location}
+              <span className="text-[var( --pink)] font-bold">Sted</span> {event.location}
             </p>
 
             {/* TIME INFO */}
-            <div className="border-t border-b border-pink-500 py-8 space-y-6">
+            <div className="border-t border-b border-[var(--pink)] py-8 space-y-6">
               <p className="text-base">
-                <span className="text-pink-500 font-bold">Doors open:</span>{" "}
+                <span className="text-[var(--pink)] font-bold">Doors open:</span>{" "}
                 {new Date(event.doorsOpen).toLocaleTimeString("da-DK", {
                   hour: "2-digit",
                   minute: "2-digit",
@@ -57,7 +57,7 @@ export default async function EventPage({ params }) {
               </p>
 
               <p className="text-base">
-                <span className="text-pink-500 font-bold">Starttidspunkt:</span>{" "}
+                <span className="text-[var(--pink)] font-bold">Starttidspunkt:</span>{" "}
                 {new Date(event.date).toLocaleTimeString("da-DK", {
                   hour: "2-digit",
                   minute: "2-digit",
@@ -67,7 +67,7 @@ export default async function EventPage({ params }) {
 
             {/* SCHEDULE */}
             <div className="mt-10 mb-5">
-              <h2 className="text-2xl font-bold text-pink-500 mb-6">Schedule</h2>
+              <h3 className=" text-[var(--pink)] text-2xl font-bold  mb-6">Schedule</h3>
 
               <div className="space-y-4">
                 {event.schedule.map((item, index) => (
@@ -85,32 +85,32 @@ export default async function EventPage({ params }) {
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="border-l-0 md:border-l-4 border-pink-500 pl-0 md:pl-10">
+          <div className="border-l-0 md:border-l-4 border-[var(--pink)] pl-0 md:pl-10">
             <div className="grid grid-cols-2 gap-8 mb-5">
               <div>
                 {/* PRICE */}
                 <div>
-                  <p className="text-pink-500 text-base font-bold">Price</p>
+                  <p className="text-[var(--pink)] text-base font-bold">Price</p>
 
                   <p className="text-base">{event.price}</p>
                 </div>
                 {/* AGE */}
                 <div>
-                  <p className="text-pink-500 text-base font-bold">AgeLimit</p>
+                  <p className="text-[var(--pink)] text-base font-bold">AgeLimit</p>
 
                   <p className="text-base">{event.ageLimit}</p>
                 </div>
 
                 {/* CATEGORY */}
                 <div>
-                  <p className="text-pink-500 text-base font-bold">kategori</p>
+                  <p className="text-[var(--pink)] text-base font-bold">kategori</p>
 
                   <p className="text-base">{event.category}</p>
                 </div>
               </div>
               {/* LINEUP */}
               <div>
-                <h2 className="text-pink-500 text-base font-bold mb-2">Lineup</h2>
+                <h2 className="text-[var(--pink)] text-base font-bold mb-2">Lineup</h2>
 
                 {event.lineup.map((artist, index) => (
                   <p key={index} className="text-base">
@@ -122,9 +122,9 @@ export default async function EventPage({ params }) {
 
             {/* DESCRIPTION */}
             <div>
-              <h2 className="text-pink-500 text-xl font-bold mb-4">Description</h2>
+              <h2 className="text-[var(--pink)] text-xl font-bold mb-4">Description</h2>
 
-              <p className="whitespace-pre-line text-base">{event.content}</p>
+              <p className="whitespace-pre-line text-[var(--text)] text-base">{event.content}</p>
             </div>
           </div>
         </div>
