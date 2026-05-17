@@ -3,7 +3,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="relative py-20 px-6 md:px-24 text-white overflow-hidden"
+      className="relative py-20 px-6 md:px-24 text-[ var(--headlines)] overflow-hidden"
       style={{
         backgroundImage: "url('/assets/bg/footerbg.jpg')",
         backgroundSize: "cover",
@@ -11,7 +11,7 @@ const Footer = () => {
       }}
     >
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/90"></div>
+      <div className="absolute inset-0 bg-[var(--background)]/90"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* GRID */}
@@ -80,13 +80,13 @@ const Footer = () => {
         <div className="text-center mt-20 md:mt-32">
           <p className="text-sm mb-4 opacity-80">Stay Connected With Us</p>
           <div className="flex justify-center gap-4">
-            <div className="w-10 h-10 border border-white/30 flex items-center justify-center">
+            <div className="w-10 h-10 border border[ var(--headlines)]-/30 flex items-center justify-center">
               <img src="/assets/icon/facebook.png" alt="icon" />
             </div>
-            <div className="w-10 h-10 border border-white/30 flex items-center justify-center">
+            <div className="w-10 h-10 border border[ var(--headlines)]-/30 flex items-center justify-center">
               <img src="/assets/icon/snapchat.png" alt="icon" />
             </div>
-            <div className="w-10 h-10 border border-white/30 flex items-center justify-center">
+            <div className="w-10 h-10 border border[ var(--headlines)]-/30 flex items-center justify-center">
               <img src="/assets/icon/instagram.png" alt="icon" />
             </div>
           </div>

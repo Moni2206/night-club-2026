@@ -24,10 +24,10 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-[600px] md:h-[700px] w-full overflow-hidden">
+    <section className="relative h-[600px] md:h-[700px] w-full overflow-hidden ">
       {/* LOADER */}
       {!loaded && (
-        <div className="absolute inset-0 bg-black flex items-center justify-center z-50">
+        <div className="absolute inset-0 bg-[var(--background)] flex items-center justify-center z-50">
           <img src="/assets/loader/madbars.gif" alt="loader" className="w-20" />
         </div>
       )}
@@ -36,17 +36,17 @@ const Hero = () => {
       {loaded && (
         <>
           {/* BACKGROUND */}
-          <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 -z-10 ">
             <Image src={randomImage} alt="hero" fill priority className="object-cover object-center" />
           </div>
 
           {/* DARK OVERLAY */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-[var(--background)]/50" />
 
           {/* CONTENT */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+          <div className="absolute  inset-0 flex flex-col items-center justify-center gap-3">
             <MotionImage src="/assets/icon/Logo.svg" alt="Logo" width={563} height={63} initial={{ rotateX: 90, opacity: 0 }} animate={{ rotateX: 0, opacity: 1 }} transition={{ duration: 0.7 }} style={{ transformPerspective: 1000 }} />
-            <h3 className="text-[32px] md:text-[38px] font-bold text-white animate-tagline bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">HAVE A GOOD TIME</h3>
+            <h3 className="text-[32px] md:text-[38px] font-bold text-[ var(--headlines)]animate-tagline bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">HAVE A GOOD TIME</h3>
             <div className="mt-6">
               <BtnBook />
             </div>

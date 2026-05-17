@@ -15,7 +15,7 @@ const GlobalNav = () => {
   const [hoveredPath, setHoveredPath] = useState(null);
 
   return (
-    <header className="sticky top-0 z-50 relative w-full full-width nav-style bg-black border-y-2 border-[oklch(65.35%_0.242_9.27)]">
+    <header className="sticky top-0 z-50 relative w-full full-width nav-style bg-[var(--background)] border-y-2 border-[oklch(65.35%_0.242_9.27)]">
       <div className="absolute top-0 left-0 w-6 h-6 bg-[oklch(65.35%_0.242_9.27)] [clip-path:polygon(0%_0%,100%_0%,0%_100%)]"></div>
       <div className="absolute bottom-0 right-0 w-6 h-6 bg-[oklch(65.35%_0.242_9.27)] [clip-path:polygon(100%_0%,100%_100%,0%_100%)]"></div>
 
@@ -37,17 +37,17 @@ const GlobalNav = () => {
         </nav>
 
         {/* BURGER BUTTON */}
-        <button type="button" onClick={() => setIsOpen(true)} className="md:hidden text-white z-50" aria-label="Open menu" aria-expanded={isOpen} aria-controls="mobile-menu">
-          <div className="w-6 h-0.5 bg-white mb-1"></div>
-          <div className="w-6 h-0.5 bg-white mb-1"></div>
-          <div className="w-6 h-0.5 bg-white"></div>
+        <button type="button" onClick={() => setIsOpen(true)} className="md:hidden text-[ var(--headlines)] z-50" aria-label="Open menu" aria-expanded={isOpen} aria-controls="mobile-menu">
+          <div className="w-6 h-0.5 text-[ var(--headlines)] mb-1"></div>
+          <div className="w-6 h-0.5 text-[ var(--headlines)] mb-1"></div>
+          <div className="w-6 h-0.5 text-[ var(--headlines)]"></div>
         </button>
 
         {/* MOBILE MENU */}
         {isOpen && (
-          <div id="mobile-menu" role="dialog" aria-modal="true" className="fixed inset-0 bg-black/90 z-[100] flex flex-col items-center justify-start pt-45 gap-8">
+          <div id="mobile-menu" role="dialog" aria-modal="true" className="fixed inset-0 bg-[var(--background)]/90 z-[100] flex flex-col items-center justify-start pt-45 gap-8">
             {/* CLOSE BUTTON */}
-            <button type="button" onClick={() => setIsOpen(false)} className="absolute top-8 right-8 text-white text-3xl font-light" aria-label="Close menu">
+            <button type="button" onClick={() => setIsOpen(false)} className="absolute top-8 right-8 text-[ var(--headlines)] text-3xl font-light" aria-label="Close menu">
               ✕
             </button>
 
@@ -58,7 +58,7 @@ const GlobalNav = () => {
               { name: "BOOK TABLE", href: "/book-table" },
               { name: "CONTACT US", href: "/contact" },
             ].map((link) => (
-              <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)} className={`text-lg font-bold tracking-widest ${pathname === link.href ? brandPink : "text-white"}`}>
+              <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)} className={`text-lg font-bold tracking-widest ${pathname === link.href ? brandPink : "text-[var(--headlines)]"}`}>
                 {link.name}
               </Link>
             ))}

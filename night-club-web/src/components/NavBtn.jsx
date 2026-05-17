@@ -7,15 +7,13 @@ import Link from "next/link";
 const DURATION = 0.3;
 const STAGGER = 0.02;
 
-const pink = "oklch(65.35% 0.242 9.27)";
-
 export default function NavBtn({ href, label, active }) {
   const [hovered, setHovered] = useState(false);
   const shouldAnimate = hovered && !active;
 
   return (
     <motion.div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-      <Link href={href} className={`relative px-4 py-2 block cursor-pointer ${active ? "text-[oklch(65.35%_0.242_9.27)]" : "text-white"}`}>
+      <Link href={href} className={`relative px-4 py-2 block cursor-pointer ${active ? "text-[var(--pink)]" : "text-[var(--headlines)]"}`}>
         <div className="relative overflow-hidden h-6">
           {/* TOP TEXT */}
           <div className="flex">
@@ -37,7 +35,7 @@ export default function NavBtn({ href, label, active }) {
 
           {/* BOTTOM TEXT */}
           {!active && (
-            <div className="absolute inset-0 flex text-[oklch(65.35%_0.242_9.27)]">
+            <div className="absolute inset-0 flex text-[var(--pink)]">
               {label.split("").map((l, i) => (
                 <motion.span
                   key={i}

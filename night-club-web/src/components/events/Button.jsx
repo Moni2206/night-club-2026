@@ -24,8 +24,8 @@ export default function Button({ slug }) {
         </motion.span>
 
         {/* WHITE BASE LINES */}
-        <div className="absolute top-0 left-0 w-full h-[2px] bg-white" />
-        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-white" />
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
+        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
 
         {/* TOP SWEEP */}
         <motion.div className="absolute top-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "right" }} variants={sweepVariants} />
