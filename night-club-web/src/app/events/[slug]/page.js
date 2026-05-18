@@ -32,7 +32,7 @@ export default async function EventPage({ params }) {
       <Navbar />
       <div className="text-white p-10">
         {/* HERO IMAGE */}
-        <img src={`${BASE_URL}${event.heroAsset.url}`} alt={event.heroAsset.alt} className="w-full h-[500px] object-cover rounded-[30px] border-4 border-text-[var(--pink)]-500 mb-10" />
+        <img src={`${BASE_URL}${event.heroAsset.url}`} alt={event.heroAsset.alt} className="w-full h-[500px] object-cover rounded-[30px] border-4 border-[var(--pink)] mb-10" />
 
         {/* CONTENT */}
         <div className="grid grid-cols-1 md:grid-cols-[40%_60%] mt-10 gap-10">
@@ -43,7 +43,7 @@ export default async function EventPage({ params }) {
             </h3>
 
             <p className="text-base mb-10">
-              <span className="text-[var( --pink)] font-bold">Sted</span> {event.location}
+              <span className="text-[var(--pink)] font-bold">Sted</span> {event.location}
             </p>
 
             {/* TIME INFO */}

@@ -50,22 +50,22 @@ async function EventList({ page = 1 }) {
       </div>
 
       {/* PAGINATION */}
-      <div className="flex items-center gap-6 text-[ var(--headlines)] justify-center py-10">
+      <div className="flex items-center gap-6 text-white justify-center py-10">
         {Array.from({ length: totalPages }).map((_, i) => {
           const pageNumber = i + 1;
-          <div className="flex items-center gap-6 text-[ var(--headlines)] justify-center py-10">
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-[ var(--headlines)]" : "opacity-50"}`}>
+          <div className="flex items-center gap-6 text-white justify-center py-10">
+            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-white" : "opacity-50"}`}>
               {pageNumber}1
             </a>
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-[ var(--headlines)]" : "opacity-50"}`}>
+            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-white" : "opacity-50"}`}>
               {pageNumber}2
             </a>
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-[ var(--headlines)]" : "opacity-50"}`}>
+            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-white" : "opacity-50"}`}>
               {pageNumber}3
             </a>
           </div>;
           return (
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-[ var(--headlines)]" : "opacity-50"}`}>
+            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-white" : "opacity-50"}`}>
               {pageNumber}
             </a>
           );
