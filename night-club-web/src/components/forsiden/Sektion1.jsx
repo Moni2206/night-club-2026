@@ -31,7 +31,7 @@ const Sektion1 = () => {
           <div key={card.title} className="relative overflow-hidden group h-[500px]">
             <img src={card.img} alt={card.title} className="w-full h-full object-cover" />
 
-            <div className="absolute inset-0 bg-[var(--background)] opacity-0 group-hover:opacity-90 transition-all duration-[1500ms]" />
+            <div className="absolute inset-0 bg-[var(--background)] opacity-0 group-hover:opacity-100 transition-all duration-[1500ms]" />
 
             <div className="absolute top-0 left-[-100%] w-full h-[2px] bg-[var(--pink)] group-hover:left-0 transition-all duration-[1500ms]" />
             <div className="absolute bottom-0 right-[-100%] w-full h-[2px] bg-[var(--pink)] group-hover:right-0 transition-all duration-[1500ms]" />
