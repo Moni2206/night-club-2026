@@ -4,8 +4,10 @@ import Sektion1 from "@/components/forsiden/Sektion1";
 
 import ForsideEventList from "@/components/forsiden/EventListCopy";
 
-export default function Page({ searchParams }) {
-  const page = Number(searchParams?.page || 1);
+export default async function Page({ searchParams }) {
+  const params = await searchParams;
+
+  const page = Number(params?.page || 1);
 
   return (
     <main className="max-w-screen-2xl mx-auto">
@@ -20,7 +22,7 @@ export default function Page({ searchParams }) {
 
         <Sektion1 />
 
-        <ForsideEventList searchParams={searchParams} />
+        <ForsideEventList />
       </section>
     </main>
   );
