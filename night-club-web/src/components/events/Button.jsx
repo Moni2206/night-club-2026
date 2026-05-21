@@ -14,25 +14,37 @@ const textVariants = {
   hover: { color: pink, transition: { duration: 0.3 } },
 };
 
-export default function Button({ slug }) {
+export default function Button({ href, onClick, children = "READ MORE" }) {
+  const Content = (
+    <motion.div initial="rest" whileHover="hover" animate="rest" className="relative w-full py-5 uppercase overflow-hidden text-center cursor-pointer">
+      <motion.span variants={textVariants} className="relative z-20">
+        {children}
+      </motion.span>
+
+      <div className="absolute top-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
+      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
+
+      <motion.div className="absolute top-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "right" }} variants={sweepVariants} />
+
+      <motion.div className="absolute bottom-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "left" }} variants={sweepVariants} />
+    </motion.div>
+  );
+
+  // 🔗 LINK MODE
+  if (href) {
+    return (
+      <div className="flex justify-center mb-8">
+        <Link href={href} className="w-full">
+          {Content}
+        </Link>
+      </div>
+    );
+  }
+
+  // 🖱️ BUTTON MODE
   return (
-    <div className="flex justify-center mb-8">
-      <motion.div initial="rest" whileHover="hover" animate="rest" className="relative w-full py-5 uppercase overflow-hidden text-center cursor-pointer">
-        {/* TEXT */}
-        <motion.span variants={textVariants} className="relative z-20">
-          READ MORE
-        </motion.span>
-
-        {/* WHITE BASE LINES */}
-        <div className="absolute top-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
-        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
-
-        {/* TOP SWEEP */}
-        <motion.div className="absolute top-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "right" }} variants={sweepVariants} />
-
-        {/* BOTTOM SWEEP */}
-        <motion.div className="absolute bottom-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "left" }} variants={sweepVariants} />
-      </motion.div>
+    <div className="flex justify-center mb-8" onClick={onClick}>
+      {Content}
     </div>
   );
 }
