@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Sektion1 from "@/components/forsiden/Sektion1";
 import ForsideEventList from "@/components/forsiden/EventListCopy";
 import Sektion3 from "@/components/forsiden/Sektion3";
+import Sektion4 from "@/components/forsiden/Sektion4";
 
 export default async function Page({ searchParams }) {
   const params = await searchParams;
@@ -25,6 +26,10 @@ export default async function Page({ searchParams }) {
         <ForsideEventList />
       </section>
       <Sektion3 />
+
+      <section className="relative md:px-30 py-10">
+        <Sektion4 />
+      </section>
     </main>
   );
 }
