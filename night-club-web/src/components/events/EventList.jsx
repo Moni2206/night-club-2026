@@ -6,74 +6,74 @@ const BASE_URL = "https://night-club-th9v.onrender.com";
 async function EventList({ page = 1 }) {
   const limit = 3;
 
-  const res = await fetch(`${BASE_URL}/events`, {
-    cache: "no-store",
-  });
-
+  const res = await fetch(`${BASE_URL}/events`, { cache: "no-store" });
   if (!res.ok) throw new Error("Kunne ikke hente events");
 
   const allEvents = await res.json();
-
-  // SORTER (vigtigt for stabil pagination)
   const sortedEvents = allEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  // PAGINATION LOGIK
   const start = (page - 1) * limit;
   const events = sortedEvents.slice(start, start + limit);
-
   const totalPages = Math.ceil(allEvents.length / limit);
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {events.map((event) => (
-          <Link key={event.id} href={`/events/${event.slug}`}>
-            <div className="cursor-pointer">
-              <img src={`${BASE_URL}${event.asset.url}`} alt={event.asset.alt} className="mb-3 w-full h-full object-cover" />
+      <div className="flex flex-col">
+        {events.map((event, index) => {
+          const isEven = index % 2 === 0;
 
-              <div className="p-10">
-                <h2 className="text-xl font-bold">{event.title}</h2>
+          return (
+            <div key={event.id} className={`grid grid-cols-1 lg:grid-cols-2 ${isEven ? "" : "lg:[direction:rtl]"}`}>
+              {/* BILLEDE */}
+              <div className="md:[direction:ltr] overflow-hidden h-[300px] md:h-[400px]">
+                <img src={`${BASE_URL}${event.heroAsset.url}`} alt={event.heroAsset.alt} className="w-full h-full object-cover" />
+              </div>
 
-                <div className="flex items-center gap-4 mt-1">
-                  <p className="text-lg text-pink-500">{new Date(event.date).toLocaleDateString("da-DK")}</p>
+              {/* TEKST */}
+              <div className="md:[direction:ltr] p-4 flex flex-col justify-end">
+                <h2 className="text-xl font-bold mb-2 uppercase">{event.title}</h2>
 
-                  <p className="text-lg font-bold">{event.location}</p>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-[var(--pink)] text-sm">
+                    {new Date(event.date).toLocaleDateString("da-DK", {
+                      month: "short",
+                      day: "numeric",
+                    })}{" "}
+                    ·{" "}
+                    {new Date(event.date).toLocaleTimeString("da-DK", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                  <span className="text-white/40">|</span>
+                  <span className="text-white text-sm uppercase">{event.location}</span>
                 </div>
 
-                <p className="text-sm opacity-70">{event.excerpt}</p>
+                <p className="text-sm opacity-70 mb-20 p-2  ">{event.description}</p>
 
-                <Button slug={event.slug} />
+                <Button slug={event.slug} className="" />
               </div>
             </div>
-          </Link>
-        ))}
+          );
+        })}
       </div>
 
       {/* PAGINATION */}
-      <div className="flex items-center gap-6 text-white justify-center py-10">
+      <div className="flex items-center justify-center gap-6 py-10 text-white">
         {Array.from({ length: totalPages }).map((_, i) => {
           const pageNumber = i + 1;
-          <div className="flex items-center gap-6 text-white justify-center py-10">
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-white" : "opacity-50"}`}>
-              {pageNumber}1
-            </a>
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-white" : "opacity-50"}`}>
-              {pageNumber}2
-            </a>
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-white" : "opacity-50"}`}>
-              {pageNumber}3
-            </a>
-          </div>;
           return (
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`cursor-pointer ${page === pageNumber ? "border-b-2 border-white" : "opacity-50"}`}>
+            <a key={pageNumber} href={`?page=${pageNumber}`} className={`text-sm transition hover:text-[var(--pink)] ${page === pageNumber ? "text-white border-b border-white" : "opacity-50"}`}>
               {pageNumber}
             </a>
           );
         })}
 
-        <a href={`?page=${page + 1}`} className="opacity-50 hover:opacity-100">
-          næste →
-        </a>
+        {page < totalPages && (
+          <a href={`?page=${page + 1}`} className="text-sm opacity-50 hover:opacity-100 hover:text-[var(--pink)] transition">
+            næste →
+          </a>
+        )}
       </div>
     </>
   );

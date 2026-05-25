@@ -16,7 +16,7 @@ const textVariants = {
 
 export default function Button({ href, onClick, children = "READ MORE" }) {
   const Content = (
-    <motion.div initial="rest" whileHover="hover" animate="rest" className="relative w-full py-5 uppercase overflow-hidden text-center cursor-pointer">
+    <motion.div initial="rest" whileHover="hover" animate="rest" className="relative w-30 py-3 uppercase overflow-hidden text-center cursor-pointer">
       <motion.span variants={textVariants} className="relative z-20">
         {children}
       </motion.span>
@@ -24,16 +24,16 @@ export default function Button({ href, onClick, children = "READ MORE" }) {
       <div className="absolute top-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
       <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
 
-      <motion.div className="absolute top-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "right" }} variants={sweepVariants} />
+      <motion.div className="absolute top-0 left-0 h-[2px] w-1/3" style={{ backgroundColor: pink, transformOrigin: "right" }} variants={sweepVariants} />
 
-      <motion.div className="absolute bottom-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "left" }} variants={sweepVariants} />
+      <motion.div className="absolute bottom-0 left-0 h-[2px] w-1/3" style={{ backgroundColor: pink, transformOrigin: "left" }} variants={sweepVariants} />
     </motion.div>
   );
 
-  // 🔗 LINK MODE
+  //  LINK MODE
   if (href) {
     return (
-      <div className="flex justify-center mb-8">
+      <div className="flex  md:justify-end justify-center mb-8">
         <Link href={href} className="w-full">
           {Content}
         </Link>
@@ -41,9 +41,9 @@ export default function Button({ href, onClick, children = "READ MORE" }) {
     );
   }
 
-  // 🖱️ BUTTON MODE
+  //  BUTTON MODE
   return (
-    <div className="flex justify-center mb-8" onClick={onClick}>
+    <div className="flex md:justify-end justify-center mb-8" onClick={onClick}>
       {Content}
     </div>
   );
