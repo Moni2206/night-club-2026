@@ -5,6 +5,7 @@ import ForsideEventList from "@/components/forsiden/EventListCopy";
 import Sektion3 from "@/components/forsiden/Sektion3";
 import Sektion4 from "@/components/forsiden/Sektion4";
 import Sektion5 from "@/components/forsiden/Sektion5";
+import Sektion6 from "@/components/forsiden/Sektion6";
 import Sektion7 from "@/components/forsiden/Sektion7";
 
 export default async function Page({ searchParams }) {
@@ -33,6 +34,7 @@ export default async function Page({ searchParams }) {
         <Sektion4 />
       </section>
       <Sektion5 />
+      <Sektion6 />
       <Sektion7 />
     </main>
   );
