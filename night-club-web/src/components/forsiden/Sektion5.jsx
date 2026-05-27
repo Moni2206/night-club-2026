@@ -4,16 +4,10 @@ import { useState } from "react";
 
 const videos = [
   {
-    poster: "/assets/content-img/video_poster.jpg",
-    video: "/assets/media/video-crowd.mp4",
-  },
-  {
-    poster: "/assets/content-img/track1.jpg",
-    video: "/assets/media/video-dj-crowd1.mp4",
-  },
-  {
-    poster: "/assets/content-img/track2.jpg",
     video: "/assets/media/video-dj-crowd-2.mp4",
+  },
+  {
+    video: "/assets/media/video-dj-crowd1.mp4",
   },
 ];
 
@@ -37,7 +31,7 @@ export default function Sektion5() {
 
       {/* VIDEO */}
       <div className="relative overflow-hidden">
-        <video src={videos[activeIndex].video} poster={videos[activeIndex].poster} controls className="w-full h-[350px] md:h-[600px] object-cover" />
+        <video src={videos[activeIndex].video} controls className="w-full h-[350px] md:h-[600px] object-cover" />
       </div>
 
       {/* BUTTONS */}

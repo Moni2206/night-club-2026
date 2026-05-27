@@ -100,7 +100,7 @@ const Sektion6 = () => {
                 key={i}
                 onClick={() => scrollToPage(i)}
                 aria-label={`Gå til side ${i + 1}`}
-                className={`w-4 h-4 block transition-all duration-300 ${activeIndex === i ? "bg-[var(--pink)]" : "border border-white opacity-50 hover:opacity-100"}`}
+                className={`w-4 h-4 block transition-all duration-300 ${activeIndex === i ? "bg-[var(--pink)]" : "border border-[var(--headlines)] opacity-50 hover:opacity-100"}`}
               />
             ))}
           </div>

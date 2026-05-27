@@ -116,84 +116,81 @@ export default function BookingClient({ initialReservations, initialEvents }) {
   }
 
   return (
-    <div className="text-white">
-      <div className="min-w-screen text-white flex justify-center">
-        <div className="w-full max-w-7xl px-6">
-          {/* HERO */}
-          <div
-            className="relative h-50 w-full flex items-center justify-center"
-            style={{
-              backgroundImage: "url('/assets/bg/footerbg.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="absolute inset-0 bg-[var(--background)]/85"></div>
-            <h1 className="relative text-[32px] md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">BOOK BORD</h1>
-          </div>
+    <div className="min-h-screen text-[var(--headlines)]">
+      {/* HERO */}
+      <div
+        className="relative h-64 md:h-80 flex items-center justify-center text-[var(--headlines)]"
+        style={{
+          backgroundImage: "url('/assets/bg/footerbg.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-[var(--background)]/85"></div>
+        <h1 className="relative text-[32px] md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">BOOK BORD</h1>
+      </div>
+      <div className="md:px-24 py-10">
+        {/* TABLES */}
+        <div className="  grid  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 p-4 sm:p-10">
+          {TABLES.map(({ id, img }) => {
+            const reserved = isTableReserved(id);
+            const reservedAnyDate = isTableReservedAnyDate(id);
+            const isSelected = selectedTable === id;
 
-          {/* TABLES */}
-          <div className="grid grid-cols-5 gap-6 p-10">
-            {TABLES.map(({ id, img }) => {
-              const reserved = isTableReserved(id);
-              const reservedAnyDate = isTableReservedAnyDate(id);
-              const isSelected = selectedTable === id;
+            return (
+              <div key={id} className="relative h-50 flex items-center justify-center">
+                <button disabled={reserved} onClick={() => setSelectedTable(id)} className={`relative ${isSelected ? "ring-2 ring-pink-500" : ""}`}>
+                  <img src={`/assets/table/${img}.png`} alt={`Bord ${id}`} className="cursor-pointer" />
 
-              return (
-                <div key={id} className="relative h-50 flex items-center justify-center">
-                  <button disabled={reserved} onClick={() => setSelectedTable(id)} className={`relative ${isSelected ? "ring-2 ring-pink-500" : ""}`}>
-                    <img src={`/assets/table/${img}.png`} alt={`Bord ${id}`} className="cursor-pointer" />
+                  {/* Rødt overlay — optaget på valgt dato */}
+                  {reserved && (
+                    <div className="absolute inset-0 bg-red-900/70 flex items-center justify-center">
+                      <span className="text-[var(--headlines)] font-bold text-lg">Booked</span>
+                    </div>
+                  )}
 
-                    {/* Rødt overlay — optaget på valgt dato */}
-                    {reserved && (
-                      <div className="absolute inset-0 bg-red-900/70 flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">Booked</span>
-                      </div>
-                    )}
+                  {/* Gult overlay — optaget på en anden dato */}
+                  {!reserved && reservedAnyDate && (
+                    <div className="absolute inset-0 bg-red-900/50 flex items-center justify-center">
+                      <span className="text-[var(--headlines)] font-bold text-sm xl:text-lg mt-10">Partly occupied</span>
+                    </div>
+                  )}
 
-                    {/* Gult overlay — optaget på en anden dato */}
-                    {!reserved && reservedAnyDate && (
-                      <div className="absolute inset-0 bg-red-900/50 flex items-center justify-center">
-                        <span className="text-white font-bold text-lg mt-10">Partly occupied</span>
-                      </div>
-                    )}
-
-                    <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${reserved ? "text-transparent" : "text-white"}`}>{id}</p>
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* FORM */}
-          <div className="gap-6 p-10">
-            <form onSubmit={handleSubmit} className="grid gap-4">
-              <div className="grid grid-cols-2 gap-4">
-                <input name="name" placeholder="Your Name" required minLength={2} maxLength={50} className="p-3 bg-[var(--background)] border w-full" />
-                <input name="email" type="email" required placeholder="Your Email" className="p-3 bg-[var(--background)] border w-full" />
-                <input name="table" value={selectedTable ?? ""} readOnly placeholder="Table Number" className="p-3 bg-[var(--background)] border w-full" />
-                <input name="guests" placeholder="Number of Guests" type="text" min="1" max="12" className="p-3 bg-[var(--background)] border w-full" />
-                <select name="event" value={selectedEvent ?? ""} onChange={(e) => setSelectedEvent(e.target.value)} className="p-3 bg-[var(--background)] border w-full text-white">
-                  <option value="">Choose Night</option>
-                  {events.map((event) => (
-                    <option key={event.id} value={event.id}>
-                      {event.title}
-                    </option>
-                  ))}
-                </select>
-                <input name="phone" placeholder="Your Contact Number" pattern="[0-9\s+]+" required className="p-3 bg-[var(--background)] border w-full" />
+                  <p className={`absolute inset-0 flex items-center justify-center text-2xl font-bold ${reserved ? "text-transparent" : "text-[var(--headlines)]"}`}>{id}</p>
+                </button>
               </div>
+            );
+          })}
+        </div>
 
-              <textarea name="content" placeholder="Your Comment" className="h-[15rem] p-3 bg-[var(--background)] border border-white w-full resize-none" />
+        {/* FORM */}
+        <div className="gap-6 p-10">
+          <form onSubmit={handleSubmit} className="grid gap-4">
+            <div className="grid md:grid-cols-2 grid-cols-1  gap-4">
+              <input name="name" placeholder="Your Name" required minLength={2} maxLength={50} className="p-3 bg-[var(--background)] border w-full" />
+              <input name="email" type="email" required placeholder="Your Email" className="p-3 bg-[var(--background)] border w-full" />
+              <input name="table" value={selectedTable ?? ""} readOnly placeholder="Table Number" className="p-3 bg-[var(--background)] border w-full" />
+              <input name="guests" placeholder="Number of Guests" type="text" min="1" max="12" className="p-3 bg-[var(--background)] border w-full" />
+              <select name="event" value={selectedEvent ?? ""} onChange={(e) => setSelectedEvent(e.target.value)} className="p-3 bg-[var(--background)] border w-full text-[var(--headlines)]">
+                <option value="">Choose Night</option>
+                {events.map((event) => (
+                  <option key={event.id} value={event.id}>
+                    {event.title}
+                  </option>
+                ))}
+              </select>
+              <input name="phone" placeholder="Your Contact Number" pattern="[0-9\s+]+" required className="p-3 bg-[var(--background)] border w-full" />
+            </div>
 
-              {error && <p className="text-red-500">{error}</p>}
-              {success && <p className="text-green-500">{success}</p>}
+            <textarea name="content" placeholder="Your Comment" className="h-[15rem] p-3 bg-[var(--background)] border border-[var(--headlines)] w-full resize-none" />
 
-              <div className="flex justify-end">
-                <button className="text-white px-10 py-2 border-y-2 border-white w-fit">Reserver</button>
-              </div>
-            </form>
-          </div>
+            {error && <p className="text-red-500">{error}</p>}
+            {success && <p className="text-green-500">{success}</p>}
+
+            <div className="flex justify-end">
+              <button className="text-[var(--headlines)] px-10 py-2 border-y-2 border-[var(--headlines)] w-fit">Reserver</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

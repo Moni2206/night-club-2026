@@ -26,7 +26,7 @@ export default async function ForsideEventList() {
 
   if (allEvents.length === 0) {
     return (
-      <section id="events" className="py-20 text-center text-white">
+      <section id="events" className="py-20 text-center text-[var(--headlines)]">
         <p>Unable to load events at the moment. Please refresh the page in a moment.</p>
       </section>
     );
@@ -37,7 +37,7 @@ export default async function ForsideEventList() {
       <div className="absolute inset-0 bg-[url('/assets/bg/slider_bg_overlay.png')] bg-cover bg-center" />
 
       {/* Dark overlay  */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-[var(--background)]/50" />
       <div className="relative z-10 py-20 max-w-6xl mx-auto px-4 overflow-hidden">
         <div className="text-center mb-16 px-6 ">
           <h2 className="text-[32px] md:text-[38px] font-bold bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">FEATURED EVENTS</h2>

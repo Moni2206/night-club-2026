@@ -68,12 +68,12 @@ export default function EventSlider({ initialEvents, baseUrl }) {
         {displayEvents.map((event) => (
           <div key={event.id} className="snap-start w-full px-2">
             <Link href={`/events/${event.slug}`}>
-              <div className="relative cursor-pointer group h-[500px] overflow-hidden border border-white/5 bg-white/5 hover:bg-white/10 transition-colors">
+              <div className="relative cursor-pointer group h-[500px] overflow-hidden border border-[var(--headlines)]/5 bg-[var(--headlines)]/5 hover:bg-[var(--headlines)]/10 transition-colors">
                 {/* IMAGE */}
                 <img src={`${baseUrl}${event.asset.url}`} alt={event.asset.alt} className="w-full h-full object-cover" />
 
                 {/* OVERLAY */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                <div className="absolute inset-0 bg-[var(--background)]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
                 {/* TOP/BOTTOM LINES */}
                 <div className="absolute top-0 left-[-100%] w-full h-[2px] bg-[var(--pink)] group-hover:left-0 transition-all z-20" />
@@ -93,26 +93,26 @@ export default function EventSlider({ initialEvents, baseUrl }) {
                         e.preventDefault();
                         window.location.href = `/book-table?event=${event.id}`;
                       }}
-                      className="bg-[var(--pink)] text-white px-8 py-3 uppercase text-sm font-bold hover:bg-white hover:text-[var(--pink)] transition-colors duration-300 cursor-pointer"
+                      className="bg-[var(--pink)] text-[var(--headlines)] px-8 py-3 uppercase text-sm font-bold hover:bg-[var(--headlines)] hover:text-[var(--pink)] transition-colors duration-300 cursor-pointer"
                     >
                       Book Now
                     </div>
                   </div>
 
-                  <div className="w-full bg-black/90 p-6 pb-20">
-                    <h3 className="text-white text-2xl font-bold mb-3">{event.title}</h3>
+                  <div className="w-full bg-[var(--background)]/90 p-6 pb-20">
+                    <h3 className="text-[var(--headlines)] text-2xl font-bold mb-3">{event.title}</h3>
 
-                    <p className="text-white text-sm leading-6">{event.excerpt}</p>
+                    <p className="text-[var(--headlines)] text-sm leading-6">{event.excerpt}</p>
                   </div>
                 </div>
 
                 {/* BOTTOM BAR */}
                 <div className="absolute bottom-0 left-0 right-0 bg-[var(--pink)] px-8 py-4 flex items-center gap-3 z-40">
-                  <span className="text-white text-sm">{event.title}</span>
+                  <span className="text-[var(--headlines)] text-sm">{event.title}</span>
 
-                  <span className="text-white text-sm font-bold">{event.location}</span>
+                  <span className="text-[var(--headlines)] text-sm font-bold">{event.location}</span>
 
-                  <span className="text-white text-sm font-bold ml-auto">
+                  <span className="text-[var(--headlines)] text-sm font-bold ml-auto">
                     {new Date(event.date).toLocaleDateString("da-DK", {
                       day: "numeric",
                       month: "short",
@@ -133,7 +133,12 @@ export default function EventSlider({ initialEvents, baseUrl }) {
       {/* PAGINATION */}
       <div className="flex justify-center items-center gap-3 py-10">
         {Array.from({ length: totalPages }).map((_, i) => (
-          <button key={i} onClick={() => scrollToPage(i)} aria-label={`Gå til side ${i + 1}`} className={`w-4 h-4 block transition-all duration-300 ${activeIndex === i ? "bg-[var(--pink)]" : "border border-white opacity-50 hover:opacity-100"}`} />
+          <button
+            key={i}
+            onClick={() => scrollToPage(i)}
+            aria-label={`Gå til side ${i + 1}`}
+            className={`w-4 h-4 block transition-all duration-300 ${activeIndex === i ? "bg-[var(--pink)]" : "border border-[var(--headlines)] opacity-50 hover:opacity-100"}`}
+          />
         ))}
       </div>
     </>
