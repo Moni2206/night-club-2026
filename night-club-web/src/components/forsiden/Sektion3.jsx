@@ -1,5 +1,3 @@
-// Gallery.jsx (SERVER COMPONENT - ingen "use client")
-
 import GalleryClient from "./GalleryClient";
 
 const BASE_URL = "https://night-club-th9v.onrender.com";

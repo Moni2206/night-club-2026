@@ -138,7 +138,7 @@ export default function Sektion4() {
         {/* AKTIVT BILLEDE — kun ét ad gangen */}
         <div onClick={() => setIsPlaying(true)} className="relative cursor-pointer overflow-hidden ">
           <img src={activeTrack.img} alt={activeTrack.title} className="w-full h-[350px] object-cover" />
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-[var(--background)]/30" />
           <div className="absolute bottom-0 right-0 w-18 h-18 bg-[var(--pink)] [clip-path:polygon(100%_0,100%_100%,0_100%)] z-40"></div>
           <div className="absolute top-0 left-0 w-18 h-18 bg-[var(--pink)] [clip-path:polygon(0_0,100%_0,0_100%)]" />
           <div className="absolute bottom-0 left-0 right-0 bg-[var(--background)] px-4 py-3 flex items-center z-30">
@@ -221,7 +221,7 @@ export default function Sektion4() {
                   className={`relative h-[160px] cursor-pointer overflow-hidden group ${i === activeIndex ? "ring-2 ring-[var(--pink)]" : ""}`}
                 >
                   <img src={track.img} alt={track.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-black/30" />
+                  <div className="absolute inset-0 bg-[var(--background)]/30" />
                   <div className="absolute bottom-0 right-0 w-9 h-9 bg-[var(--pink)] [clip-path:polygon(100%_0,100%_100%,0_100%)]"></div>
                   <div className="absolute top-0 left-0 w-10 h-10 bg-[var(--pink)] [clip-path:polygon(0_0,100%_0,0_100%)]" />
 

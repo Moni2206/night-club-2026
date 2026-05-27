@@ -10,7 +10,7 @@ const sweepVariants = {
 };
 
 const textVariants = {
-  rest: { color: "#ffffff" },
+  rest: { color: "oklch(100.00% 0.000 0)" },
   hover: { color: pink, transition: { duration: 0.3 } },
 };
 

@@ -10,7 +10,7 @@ const sweepVariants = {
 };
 
 const textVariants = {
-  rest: { color: "#ffffff" },
+  rest: { color: "oklch(100.00% 0.000 0)" },
   hover: { color: pink, transition: { duration: 0.3 } },
 };
 
@@ -24,9 +24,9 @@ export default function Button({ href, onClick, children = "READ MORE" }) {
       <div className="absolute top-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
       <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
 
-      <motion.div className="absolute top-0 left-0 h-[2px] w-1/3" style={{ backgroundColor: pink, transformOrigin: "right" }} variants={sweepVariants} />
+      <motion.div className="absolute top-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "right" }} variants={sweepVariants} />
 
-      <motion.div className="absolute bottom-0 left-0 h-[2px] w-1/3" style={{ backgroundColor: pink, transformOrigin: "left" }} variants={sweepVariants} />
+      <motion.div className="absolute bottom-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "left" }} variants={sweepVariants} />
     </motion.div>
   );
 

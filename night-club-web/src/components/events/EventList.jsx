@@ -45,13 +45,13 @@ async function EventList({ page = 1 }) {
                       minute: "2-digit",
                     })}
                   </span>
-                  <span className="text-white/40">|</span>
-                  <span className="text-white text-sm uppercase">{event.location}</span>
+                  <span className="text-[var(--headlines)]/40">|</span>
+                  <span className="text-[var(--headlines)] text-sm uppercase">{event.location}</span>
                 </div>
 
                 <p className="text-sm opacity-70 mb-20 p-2  ">{event.description}</p>
 
-                <Button slug={event.slug} className="" />
+                <Button href={`/events/${event.slug}`} />
               </div>
             </div>
           );
@@ -59,11 +59,11 @@ async function EventList({ page = 1 }) {
       </div>
 
       {/* PAGINATION */}
-      <div className="flex items-center justify-center gap-6 py-10 text-white">
+      <div className="flex items-center justify-center gap-6 py-10 text-[var(--headlines)]">
         {Array.from({ length: totalPages }).map((_, i) => {
           const pageNumber = i + 1;
           return (
-            <a key={pageNumber} href={`?page=${pageNumber}`} className={`text-sm transition hover:text-[var(--pink)] ${page === pageNumber ? "text-white border-b border-white" : "opacity-50"}`}>
+            <a key={pageNumber} href={`?page=${pageNumber}`} className={`text-sm transition hover:text-[var(--pink)] ${page === pageNumber ? "text-[var(--headlines)] border-b border-[var(--headlines)]" : "opacity-50"}`}>
               {pageNumber}
             </a>
           );
