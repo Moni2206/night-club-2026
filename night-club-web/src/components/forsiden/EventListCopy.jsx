@@ -16,7 +16,6 @@ async function getEvents() {
     const events = await res.json();
     return events.sort((a, b) => new Date(a.date) - new Date(b.date));
   } catch (error) {
-    console.error("Error fetching events:", error.message);
     return [];
   }
 }

@@ -23,7 +23,6 @@ export default function Home() {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  // INPUT CHANGE
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -31,14 +30,12 @@ export default function Home() {
     });
   };
 
-  // SUBMIT
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setSuccess("");
     setError("");
 
-    /* client-side validation (Zod) */
     const result = contactSchema.safeParse(form);
 
     if (!result.success) {
@@ -54,19 +51,23 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          content: form.message, // ✅ FIX HER
+          date: new Date().toISOString(), // ✅ KRÆVES AF API
+        }),
       });
 
-      /*  brugervenlige API-fejl */
+      const data = await res.json();
+
       if (res.status === 409) {
         setError("This email has already been used.");
-        setLoading(false);
         return;
       }
 
       if (!res.ok) {
-        setError("Something went wrong. Please try again.");
-        setLoading(false);
+        setError(data?.error?.message || "Something went wrong. Please try again.");
         return;
       }
 
@@ -77,7 +78,7 @@ export default function Home() {
         email: "",
         message: "",
       });
-    } catch {
+    } catch (err) {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -88,7 +89,6 @@ export default function Home() {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* HERO */}
       <div
         className="relative h-64 md:h-80 flex items-center justify-center text-[var(--headlines)]"
         style={{
@@ -102,18 +102,14 @@ export default function Home() {
         <h1 className="relative text-[32px] md:text-[38px] font-bold z-10 bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">CONTACT US</h1>
       </div>
 
-      {/* FORM */}
       <div className="px-6 md:px-45 py-10 max-w-3xl md:max-w-4xl mx-auto">
         <form onSubmit={handleSubmit} className="mt-10 grid grid-cols-1 gap-4 max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 gap-4">
-            <input type="text" name="name" placeholder="Your Name" value={form.name} onChange={handleChange} disabled={loading} className="p-3 bg--[var(--background)] border border-[var(--headlines)] w-full text-[var(--headlines)]" />
+          <input type="text" name="name" placeholder="Your Name" value={form.name} onChange={handleChange} disabled={loading} className="p-3 bg-[var(--background)] border border-[var(--headlines)] w-full text-[var(--headlines)]" />
 
-            <input type="email" name="email" placeholder="Your Email" value={form.email} onChange={handleChange} disabled={loading} className="p-3 bg--[var(--background)] border border-[var(--headlines)] w-full text-[var(--headlines)]" />
-          </div>
+          <input type="email" name="email" placeholder="Your Email" value={form.email} onChange={handleChange} disabled={loading} className="p-3 bg-[var(--background)] border border-[var(--headlines)] w-full text-[var(--headlines)]" />
 
-          <textarea name="message" placeholder="Your Comment" value={form.message} onChange={handleChange} disabled={loading} className="p-3 h-60 bg--[var(--background)] border border-[var(--headlines)] w-full text-[var(--headlines)] resize-none" />
+          <textarea name="message" placeholder="Your Message" value={form.message} onChange={handleChange} disabled={loading} className="p-3 h-60 bg-[var(--background)] border border-[var(--headlines)] w-full text-[var(--headlines)] resize-none" />
 
-          {/* FEEDBACK */}
           {error && <p className="text-red-500">{error}</p>}
           {success && <p className="text-green-500">{success}</p>}
 

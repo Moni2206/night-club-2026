@@ -38,8 +38,7 @@ const TABLES = [
 
 export default function BookingClient({ initialReservations, initialEvents }) {
   const searchParams = useSearchParams();
-  console.log("Reservationer:", initialReservations);
-  // Læs eventId fra URL — fx ?event=1
+
   const eventIdFromUrl = searchParams.get("event") ?? "";
 
   const [reservations, setReservations] = useState(initialReservations);
