@@ -91,11 +91,9 @@ export default function GalleryClient({ images = [] }) {
             onClick={() => setSelectedIndex(index)}
           >
             <img src={`${BASE_URL}${image.asset.url}`} alt={image.asset.alt || "Gallery image"} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
-            {/* OVERLAY */}
             <div className="absolute inset-0 bg-[var(--background)]/20  md:hover:bg-[var(--background)]/0 transition-all duration-500" />
-            {/* TOP LINE */} <div className="absolute top-0 left-0 w-20 h-20 bg-[var(--pink)] [clip-path:polygon(0_0,100%_0,0_100%)] opacity-0 md:group-hover:opacity-100 transition-all duration-[1000ms]" />{" "}
+            <div className="absolute top-0 left-0 w-20 h-20 bg-[var(--pink)] [clip-path:polygon(0_0,100%_0,0_100%)] opacity-0 md:group-hover:opacity-100 transition-all duration-[1000ms]" />{" "}
             <div className="absolute top-0 -left-full w-full h-[2px] bg-[var(--pink)] md:group-hover:left-0 transition-all z-20" />
-            {/* BOTTOM LINE */}
             <div className="absolute bottom-0 right-0 w-20 h-20 bg-[var(--pink)] [clip-path:polygon(100%_0,100%_100%,0_100%)] opacity-0 md:group-hover:opacity-100 transition-all duration-[1000ms]" />{" "}
             <div className="absolute bottom-0 -right-full w-full h-[2px] bg-[var(--pink)] md:group-hover:right-0 transition-all z-20" />{" "}
           </motion.div>
@@ -114,12 +112,10 @@ export default function GalleryClient({ images = [] }) {
                 ×
               </button>
 
-              {/* PREV */}
               <button onClick={prevImage} className="absolute left-6 text-[var(--headlines)] text-6xl">
                 ‹
               </button>
 
-              {/* CONTENT */}
               <div className="flex flex-col items-center gap-6 bg-[var(--hoverBg)]  ">
                 <motion.img key={image.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} src={`${BASE_URL}${image.asset.url}`} alt={image.asset.alt} className="max-w-[80vw] max-h-[60vh] object-contain" />
 
@@ -129,11 +125,10 @@ export default function GalleryClient({ images = [] }) {
                     <p className="text-base opacity-80 leading-6">{card.text}</p>
                   </div>
                 )}
-                {/* ={`/events/${image.slug}`} */}
+
                 <Button href={`/events`} />
               </div>
 
-              {/* NEXT */}
               <button onClick={nextImage} className="absolute right-6 text-[var(--headlines)] text-6xl">
                 ›
               </button>

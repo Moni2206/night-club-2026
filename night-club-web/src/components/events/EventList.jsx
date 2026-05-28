@@ -24,12 +24,10 @@ async function EventList({ page = 1 }) {
 
           return (
             <div key={event.id} className={`grid grid-cols-1 lg:grid-cols-2 ${isEven ? "" : "lg:[direction:rtl]"}`}>
-              {/* BILLEDE */}
               <div className="md:[direction:ltr] overflow-hidden h-[300px] md:h-[400px]">
                 <img src={`${BASE_URL}${event.heroAsset.url}`} alt={event.heroAsset.alt} className="w-full h-full object-cover" />
               </div>
 
-              {/* TEKST */}
               <div className="md:[direction:ltr] p-4 flex flex-col justify-end">
                 <h2 className="text-xl font-bold mb-2 uppercase">{event.title}</h2>
 

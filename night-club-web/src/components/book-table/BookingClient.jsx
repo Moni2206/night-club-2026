@@ -141,14 +141,12 @@ export default function BookingClient({ initialReservations, initialEvents }) {
                 <button disabled={reserved} onClick={() => setSelectedTable(id)} className={`relative ${isSelected ? "ring-2 ring-pink-500" : ""}`}>
                   <img src={`/assets/table/${img}.png`} alt={`Bord ${id}`} className="cursor-pointer" />
 
-                  {/* Rødt overlay — optaget på valgt dato */}
                   {reserved && (
                     <div className="absolute inset-0 bg-red-900/70 flex items-center justify-center">
                       <span className="text-[var(--headlines)] font-bold text-lg">Booked</span>
                     </div>
                   )}
 
-                  {/* Gult overlay — optaget på en anden dato */}
                   {!reserved && reservedAnyDate && (
                     <div className="absolute inset-0 bg-red-900/50 flex items-center justify-center">
                       <span className="text-[var(--headlines)] font-bold text-sm xl:text-lg mt-10">Partly occupied</span>

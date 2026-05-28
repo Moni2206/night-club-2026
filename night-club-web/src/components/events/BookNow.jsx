@@ -19,19 +19,15 @@ export default function Button({ eventId }) {
     <div className="flex justify-center mb-8">
       <Link href={`/book-table?event=${eventId}`} className="w-full block">
         <motion.div initial="rest" whileHover="hover" animate="rest" className="relative w-full py-5 uppercase overflow-hidden text-center cursor-pointer">
-          {/* TEXT */}
           <motion.span variants={textVariants} className="relative z-20">
             Book Now
           </motion.span>
 
-          {/* WHITE BASE LINES */}
           <div className="absolute top-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
           <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--headlines)]" />
 
-          {/* TOP SWEEP */}
           <motion.div className="absolute top-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "right" }} variants={sweepVariants} />
 
-          {/* BOTTOM SWEEP */}
           <motion.div className="absolute bottom-0 left-0 h-[2px] w-full" style={{ backgroundColor: pink, transformOrigin: "left" }} variants={sweepVariants} />
         </motion.div>
       </Link>

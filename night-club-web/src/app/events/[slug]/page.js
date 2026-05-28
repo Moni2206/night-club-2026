@@ -31,7 +31,6 @@ export default async function EventPage({ params }) {
     <div>
       <Navbar />
       <div className="text-white p-10">
-        {/* HERO IMAGE */}
         <img src={`${BASE_URL}${event.heroAsset.url}`} alt={event.heroAsset.alt} className="w-full h-[500px] object-cover rounded-[30px] border-4 border-[var(--pink)] mb-10" />
 
         {/* CONTENT */}
@@ -46,7 +45,6 @@ export default async function EventPage({ params }) {
               <span className="text-[var(--pink)] font-bold">Sted</span> {event.location}
             </p>
 
-            {/* TIME INFO */}
             <div className="border-t border-b border-[var(--pink)] py-8 space-y-6">
               <p className="text-base">
                 <span className="text-[var(--pink)] font-bold">Doors open:</span>{" "}
@@ -84,31 +82,28 @@ export default async function EventPage({ params }) {
             <BookNow eventId={event.id} />
           </div>
 
-          {/* RIGHT SIDE */}
           <div className="border-l-0 md:border-l-4 border-[var(--pink)] pl-0 md:pl-10">
             <div className="grid grid-cols-2 gap-8 mb-5">
               <div>
-                {/* PRICE */}
                 <div>
                   <p className="text-[var(--pink)] text-base font-bold">Price</p>
 
                   <p className="text-base">{event.price}</p>
                 </div>
-                {/* AGE */}
+
                 <div>
                   <p className="text-[var(--pink)] text-base font-bold">AgeLimit</p>
 
                   <p className="text-base">{event.ageLimit}</p>
                 </div>
 
-                {/* CATEGORY */}
                 <div>
                   <p className="text-[var(--pink)] text-base font-bold">kategori</p>
 
                   <p className="text-base">{event.category}</p>
                 </div>
               </div>
-              {/* LINEUP */}
+
               <div>
                 <h2 className="text-[var(--pink)] text-base font-bold mb-2">Lineup</h2>
 
@@ -130,7 +125,6 @@ export default async function EventPage({ params }) {
         </div>
       </div>
 
-      {/* COMMENTS */}
       <Comments eventId={event.id} />
     </div>
   );

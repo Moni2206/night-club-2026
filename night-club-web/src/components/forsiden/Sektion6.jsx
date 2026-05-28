@@ -50,12 +50,9 @@ const Sektion6 = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* overlay */}
       <div className="absolute inset-0 bg-[var(--background)]/90" />
 
-      {/* content */}
       <div className="relative z-10 max-w-7xl mx-auto text-center md:px-30 py-10">
-        {/* TESTIMONIAL CONTENT */}
         {testimonials.length > 0 && testimonials[activeIndex] && (
           <>
             <img src={`${BASE_URL}${testimonials[activeIndex].asset.url}`} alt={testimonials[activeIndex].asset.alt} className="mx-auto" />
@@ -64,7 +61,6 @@ const Sektion6 = () => {
 
             <p className="text-[var(--headlines)] mt-4 px-6 md:px-12">{testimonials[activeIndex].content}</p>
 
-            {/* SOCIAL LINKS */}
             <div className="flex justify-center gap-4 mt-6">
               <div className="w-10 h-10 border border[ var(--headlines)]-/30 flex items-center justify-center">
                 {testimonials[activeIndex].facebook && (

@@ -54,8 +54,8 @@ export default function Home() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          content: form.message, // ✅ FIX HER
-          date: new Date().toISOString(), // ✅ KRÆVES AF API
+          content: form.message,
+          date: new Date().toISOString(),
         }),
       });
 

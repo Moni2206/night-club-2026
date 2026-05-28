@@ -10,13 +10,10 @@ const Footer = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* Dark overlay */}
       <div className="absolute inset-0 bg-[var(--background)]/90"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-          {" "}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <img src="/assets/icon/Logo_main.svg" alt="Logo" className="h-12 w-auto mb-8" />
 
@@ -30,11 +27,10 @@ const Footer = () => {
             <p className="text-sm uppercase leading-relaxed">Wed - Thu: 10:30 PM to 3 AM</p>
             <p className="text-sm uppercase leading-relaxed">Sat - Sun: 11 PM to 5 AM</p>
           </div>
-          {/* Column 2 - News */}
+
           <div className="hidden md:block">
             <h3 className={`${pinkText} font-bold uppercase mb-10`}>News</h3>
 
-            {/* Item */}
             <div className="flex gap-6 mb-8 items-center">
               <img src="/assets/content-img/recent_post1.jpg" alt="" className="h-[110px] w-[110px] object-cover" />
               <div className="max-w-[260px]">
@@ -43,7 +39,6 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Item */}
             <div className="flex gap-6 items-center">
               <img src="/assets/content-img/recent_post2.jpg" alt="" className="h-[110px] w-[110px] object-cover" />
               <div className="max-w-[260px]">
@@ -52,11 +47,10 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          {/* Column 3 - Recent Posts */}
+
           <div className="hidden md:block">
             <h3 className={`${pinkText} font-bold uppercase mb-10`}>Recent Posts</h3>
 
-            {/* Item */}
             <div className="flex gap-6 mb-6 items-start">
               <img src="/assets/icon/x.png" alt="icon" className="h-4 w-4 mt-[6px]" />
               <div className="max-w-[260px]">
@@ -65,7 +59,6 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Item */}
             <div className="flex gap-6 items-start">
               <img src="/assets/icon/x.png" alt="icon" className="h-4 w-4 mt-[6px]" />
               <div className="max-w-[260px]">
@@ -76,7 +69,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Social Section */}
         <div className="text-center mt-20 md:mt-32">
           <p className="text-sm mb-4 opacity-80">Stay Connected With Us</p>
           <div className="flex justify-center gap-4">
@@ -92,7 +84,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="mt-16 pt-10  flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-xs opacity-50 italic">Night Club - All Rights Reserved</p>
 

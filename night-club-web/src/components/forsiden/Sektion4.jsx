@@ -100,23 +100,19 @@ export default function Sektion4() {
 
   return (
     <section className="py-20 px-6 md:px-16 relative">
-      {/* TITEL */}
       <div className="text-center mb-10">
         <h2 className="text-[32px] md:text-[38px] font-bold bg-[url('/assets/bottom_line.png')] bg-bottom bg-no-repeat pb-2 [background-size:140%_18px]">NIGHT CLUB TRACK</h2>
       </div>
 
       {/* ================= MOBIL ================= */}
       <div className="md:hidden flex flex-col gap-5">
-        {/* SANG TITEL */}
         <h3 className="text-[var(--headlines)] text-xl font-bold uppercase text-center">{activeTrack.title}</h3>
 
-        {/* TID */}
         <span className="text-[var(--headlines)] text-sm text-center">
           {formatTime(currentTime)} / {formatTime(duration)}
         </span>
         <input type="range" min={0} max={duration || 0} value={currentTime} onChange={handleSeek} className="w-full accent-[var(--pink)] cursor-pointer" />
 
-        {/* KONTROLLER */}
         <div className="flex items-center justify-center gap-6">
           <button onClick={handlePrev} className="text-[var(--headlines)] text-2xl hover:text-[var(--pink)]">
             ⏮
@@ -129,13 +125,11 @@ export default function Sektion4() {
           </button>
         </div>
 
-        {/* VOLUMEN */}
         <div className="flex items-center justify-center gap-3">
           <FaVolumeUp size={30} />
           <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolume} className="w-40 accent-[var(--pink)] cursor-pointer" />
         </div>
 
-        {/* AKTIVT BILLEDE — kun ét ad gangen */}
         <div onClick={() => setIsPlaying(true)} className="relative cursor-pointer overflow-hidden ">
           <img src={activeTrack.img} alt={activeTrack.title} className="w-full h-[350px] object-cover" />
           <div className="absolute inset-0 bg-[var(--background)]/30" />
@@ -166,14 +160,11 @@ export default function Sektion4() {
       <div className="hidden md:block">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-[250px_1fr] gap-8 items-center">
-            {/* STORT BILLEDE */}
             <img src={activeTrack.img} alt={activeTrack.title} className="w-full h-[260px] object-cover" />
 
-            {/* KONTROLLER */}
             <div className="flex flex-col gap-6">
               <h3 className="text-[var(--headlines)] text-xl font-bold uppercase">{activeTrack.title}</h3>
 
-              {/* TIDSLINJE */}
               <input type="range" min={0} max={duration || 0} value={currentTime} onChange={handleSeek} className="w-full accent-[var(--pink)] cursor-pointer" />
 
               <div className="flex items-center justify-between">

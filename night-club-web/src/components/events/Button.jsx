@@ -30,7 +30,6 @@ export default function Button({ href, onClick, children = "READ MORE" }) {
     </motion.div>
   );
 
-  //  LINK MODE
   if (href) {
     return (
       <div className="flex  md:justify-end justify-center mb-8">
@@ -41,7 +40,6 @@ export default function Button({ href, onClick, children = "READ MORE" }) {
     );
   }
 
-  //  BUTTON MODE
   return (
     <div className="flex md:justify-end justify-center mb-8" onClick={onClick}>
       {Content}
