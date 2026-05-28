@@ -6,7 +6,7 @@ import Link from "next/link";
 import GlobalNavBtn from "./NavBtn";
 import { usePathname } from "next/navigation";
 
-const brandPink = "text-[oklch(65.35%_0.242_9.27)] bg-bottom bg-no-repeat pb-2 bg-contain";
+const brandPink = "text-[oklch(65.35%_0.242_9.27)] ";
 
 const GlobalNav = () => {
   const pathname = usePathname();
@@ -25,7 +25,7 @@ const GlobalNav = () => {
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex gap-5" role="navigation" aria-label="Main navigation" onMouseLeave={() => setHoveredPath(null)}>
+        <nav className="hidden md:flex gap-10 items-center" role="navigation" aria-label="Main navigation" onMouseLeave={() => setHoveredPath(null)}>
           <GlobalNavBtn href="/" label="HOME" active={pathname === "/"} hovered={hoveredPath === "HOME"} onHover={() => setHoveredPath("HOME")} />
 
           <GlobalNavBtn href="/events" label="EVENTS" active={pathname === "/events"} hovered={hoveredPath === "EVENTS"} onHover={() => setHoveredPath("EVENTS")} />
@@ -54,7 +54,7 @@ const GlobalNav = () => {
               { name: "BOOK TABLE", href: "/book-table" },
               { name: "CONTACT US", href: "/contact" },
             ].map((link) => (
-              <Link key={link.href} href={link.href} popoverTarget="mobile-menu" popoverTargetAction="hide" className={pathname === link.href ? brandPink : "text-[var(--headlines)] text-lg font-bold tracking-widest"}>
+              <Link key={link.href} href={link.href} popoverTarget="mobile-menu" popoverTargetAction="hide" className={pathname === link.href ? brandPink : "text-[var(--headlines)] text-lg font-bold "}>
                 {link.name}
               </Link>
             ))}
